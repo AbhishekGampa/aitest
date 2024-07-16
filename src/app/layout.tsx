@@ -36,14 +36,24 @@ export default function RootLayout({
   const buttonRef = useRef<HTMLImageElement | null>(null);
 
   const handleNavbarClick = (event: any, screen: string) => {
+    console.log("clickkking");
     event.stopPropagation();
     switch (screen) {
       case "Home":
-        router.push("/")
+        setShowModal(false);
+        router.push("/");
         break;
       case "Chats":
         setShowModal((prev) => !prev);
         break;
+      case "Tasks":
+        setShowModal(false);
+      case "Explore":
+        setShowModal(false);
+      case "FileVault":
+        setShowModal(false);
+      case "Setting":
+        setShowModal(false);
       default:
         break;
     }
@@ -63,37 +73,27 @@ export default function RootLayout({
     setShowModal(isOpen);
   };
 
-  const handleClickOutside = (event: any) => {
-    if (
-      (modalRef.current && !modalRef.current.contains(event.target)) ||
-      (buttonRef.current && !buttonRef.current.contains(event.target))
-    ) {
-      setShowModal(false);
-      setShowDropDown(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   return (
     <html lang="en">
       <body className="bg-white ">
         <Provider store={store}>
           <div className="flex flex-row w-screen">
-            <div className="flex flex-col p-5 gap-5 h-full">
+            <div
+              className={`flex flex-col p-5 gap-5 h-screen ${
+                showMenu ? "w-[250px]" : "w-[70px]"
+              }`}
+              style={{ backgroundColor: "#F9F9FA" }}
+            >
               <div className=" flex flex-row gap-3">
                 <Image src={logo} alt="logo" />
-                <Image src={vectorline} alt="vector" width={3} />
+                {showMenu ? (
+                  <Image src={vectorline} alt="vector" width={3} />
+                ) : null}
                 {showMenu ? (
                   <Image src={companylogo} alt="companylogo" />
                 ) : null}
               </div>
-              {navLinks.map((nav:any) => (
+              {navLinks.map((nav: any) => (
                 <div
                   className="flex flex-row gap-3 cursor-pointer"
                   onClick={(e) => handleNavbarClick(e, nav.text)}

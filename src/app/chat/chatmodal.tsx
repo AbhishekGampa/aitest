@@ -1,20 +1,18 @@
 import { useGetExpertsQuery } from "@/rtkquery/chatapis";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { forwardRef, ForwardRefRenderFunction, useEffect, useState } from "react";
 import closeButton from "../../Images/closeButton.svg";
 
+type ChatModalProps = {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  onModalChange: (isOpen: boolean) => void;
+};
 
-function ChatModal({
-  setShowModal,
-  onModalChange,
-}: {
-  setShowModal: (show: boolean) => void;
-  onModalChange: (changed: boolean) => void;
-}) {
-  const {data} = useGetExpertsQuery({}) 
-  const handleClick = (event: any) => {
+const ChatModal = forwardRef<HTMLDivElement, ChatModalProps>(
+  ({ setShowModal, onModalChange }) => {
+  const { data } = useGetExpertsQuery({}); 
+  const handleClick = (event:any) => {
     event.stopPropagation();
     setShowModal(false);
     onModalChange(false);
@@ -23,8 +21,7 @@ function ChatModal({
 
   return (
     <>
-    
-      <div className="absolute top-1 left-5 mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] h-screen overflow-scroll hide-scrollbar" style={{height: 'calc(100vh - 1.2rem)' }}>
+      <div  className="absolute top-1 left-5 mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] h-screen overflow-scroll hide-scrollbar" style={{height: 'calc(100vh - 1.2rem)' }}>
         <div className="flex flex-col items-start gap-3 self-stretch">
           <div className="flex flex-row justify-between w-full items-center">
             <div
@@ -69,6 +66,6 @@ function ChatModal({
       </div>
     </>
   );
-}
+})
 
 export default ChatModal;
