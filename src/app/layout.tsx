@@ -21,7 +21,7 @@ import BellIcon from "../Images/NotificationIcon.svg";
 import userImage from "../Images/userInfoIcon.svg";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
-import axios from "axios";
+import ChatModal from "./chat/chatmodal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,21 +36,6 @@ export default function RootLayout({
   const [showDropDown, setShowDropDown] = useState(false)
   const modalRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLImageElement | null>(null);
-  
-  const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjM3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjEwOTE3NzEsIm5iZiI6MTcyMTA5MTc3MSwianRpIjoiNzQyYTExYjgtMmJmMi00NDQzLTkwZjItZjQwOWMxMGJjNWExIiwiZXhwIjoxNzIxMTc4MTcxLCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.DmNH0jxyix9N61bDiSjIUiXmleNiT_AUNZE-Erh4g7Q";
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_BASE_URL}experts`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setData(res.data);
-      });
-  }, []);
 
   const handleClick = (event:any) => {
     event.stopPropagation();
@@ -64,6 +49,10 @@ export default function RootLayout({
 
   const handleClickFolder = () => {
     setShowMenu((prev) => !prev);
+  };
+
+  const handleModalChange = (isOpen:boolean) => {
+    setShowModal(isOpen);
   };
 
   const handleClickOutside = (event: any) => {
@@ -85,7 +74,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-white ">
+      <body className="bg-white hide-scrollbar">
         <div className="flex flex-row w-screen">
           <div className="flex flex-col p-5 gap-5 h-full">
             <div className=" flex flex-row gap-2 max-h-max">
@@ -124,44 +113,7 @@ export default function RootLayout({
           </div>
           <div className="relative">
             {showModal ? (
-              <div className="absolute top-0 left-0 mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] ">
-                <div className="flex flex-col items-start gap-2 self-stretch">
-                  <div
-                    className="rounded-full border"
-                    style={{
-                      borderColor: "var(--button-secondary-stroke, #758399)",
-                    }}
-                  >
-                    <span className="py-1 px-3 text-sm">
-                      Manage AI Experts
-                    </span>
-                  </div>
-                  <div>
-                    <h5 className="text-xs font-normal leading-tight custom-font-family custom-letter-spacing text-custom-color">
-                      Select AI Expert
-                    </h5>
-                  </div>
-                  {data?.map((item: any) => (
-                    <div className="flex justify-between items-center">
-                      <div className="flex flex-row w-max px-2 py-1 items-center gap-2 self-stretch">
-                        <Image
-                          src={`${process.env.NEXT_PUBLIC_BASE_URL + item.avatar}`}
-                          alt={`${item.expert_name}`}
-                          className="rounded-full"
-                          width={15}
-                          height={15}
-                        />
-                        <Link href={`/chat/${item.id}`}>
-                          <h5 onClick={(event)=>handleClick(event)}>{item.expert_name}</h5>
-                        </Link>
-                      </div>
-                      <div className=" text-text-secondary overflow-hidden text-right truncate font-custom text-sm font-normal leading-tight tracking-tight-custom text-custom-secondary">
-                        {item.time}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+             <ChatModal setShowModal={setShowModal} onModalChange={handleModalChange}  />
             ) : null}
           </div>
           <div className="flex flex-col w-full">
