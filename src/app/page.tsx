@@ -6,7 +6,7 @@ import Experts from "./home/experts";
 
 function Home() {
   const { data, error } = useGetDashboardDataQuery({});
-  console.log("data", data);
+  console.log("Home data", data);
   return (
     <>
       <div className="px-10 ">

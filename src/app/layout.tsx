@@ -25,6 +25,7 @@ import ChatModal from "./chat/chatmodal";
 import ExploreModal from "./(explore)/exploremodal";
 import { useRouter } from "next/navigation";
 import { navLinks } from "@/utils/constants";
+import ChatDropDown from "./chat/chatdropdown";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -148,37 +149,7 @@ export default function RootLayout({
                     <div>
                       <h5>AI expert</h5>
                       {showDropDown ? (
-                        <div
-                          ref={modalRef}
-                          className="absolute top-full left-0 mt-1 bg-white shadow-md rounded-lg p-5 w-max"
-                        >
-                          <div className="flex flex-col items-start gap-1 self-stretch">
-                            {data &&
-                              data.map((item: any) => (
-                                <div className="flex flex-row px-2 py-1 items-center gap-2 self-stretch">
-                                  <Image
-                                    src={`${
-                                      process.env.NEXT_PUBLIC_BASE_URL +
-                                      item.avatar
-                                    }`}
-                                    alt={`${item.expert_name}`}
-                                    className="rounded-full"
-                                    width={15}
-                                    height={15}
-                                  />
-                                  <Link href={`/chat/${item.id}`}>
-                                    <h5
-                                      onClick={(event) =>
-                                        handleClickEvent(event)
-                                      }
-                                    >
-                                      {item.expert_name}
-                                    </h5>
-                                  </Link>
-                                </div>
-                              ))}
-                          </div>
-                        </div>
+                        <ChatDropDown setShowDropDown={setShowDropDown} />
                       ) : null}
                     </div>
                     <Image
