@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {api} from "../rtkquery/index"
+import {apiSlice} from "../rtkquery/index"
 
 export const store = configureStore({
   reducer: {
-    [api.reducerPath]: api.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,4 +1,4 @@
-import { useGetExpertsQuery } from "@/rtkquery";
+import { useGetExpertsQuery } from "@/rtkquery/chatapis";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,33 +13,18 @@ function ChatModal({
   setShowModal: (show: boolean) => void;
   onModalChange: (changed: boolean) => void;
 }) {
-  const [data, setData] = useState<any>();
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjM3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjExMTMwNzUsIm5iZiI6MTcyMTExMzA3NSwianRpIjoiMWNlOGYxZTUtYTgyNy00YWNhLTg4ZjktNjQ2YTI1OTVmZmFjIiwiZXhwIjoxNzIxMTk5NDc1LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.auqdFeab4_58aJ95jxNLEvGNLwueH5bl90KJaEL72_8";
-
+  const {data} = useGetExpertsQuery({}) 
   const handleClick = (event: any) => {
     event.stopPropagation();
     setShowModal(false);
     onModalChange(false);
   };
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_BASE_URL}experts`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setData(res.data);
-      });
-  }, []);
 
   return (
     <>
     
-      <div className="absolute top-1 left-5 mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] h-screen overflow-scroll hide-scrollbar">
+      <div className="absolute top-1 left-5 mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] h-screen overflow-scroll hide-scrollbar" style={{height: 'calc(100vh - 1.2rem)' }}>
         <div className="flex flex-col items-start gap-3 self-stretch">
           <div className="flex flex-row justify-between w-full items-center">
             <div

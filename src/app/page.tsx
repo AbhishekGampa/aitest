@@ -1,5 +1,5 @@
 'use client'
-import { useGetExpertsQuery } from '@/rtkquery'
+import { useGetExpertsQuery } from '@/rtkquery/chatapis'
 import React from 'react'
 
 function Home() {

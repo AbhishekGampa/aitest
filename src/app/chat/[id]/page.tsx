@@ -1,5 +1,5 @@
 'use client'
-import { useGetExpertByIdQuery } from "@/rtkquery";
+import { useGetExpertByIdQuery } from "@/rtkquery/chatapis";
 import React from "react";
 import ChatTop from "../chattop";
 
