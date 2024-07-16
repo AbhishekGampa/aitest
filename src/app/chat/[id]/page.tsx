@@ -11,7 +11,6 @@ function Chats(req:any) {
     <>
     <ChatTop {...data} />
       <div>
-        
       </div>
     </>
   );
