@@ -38,19 +38,17 @@ export default function RootLayout({
   const [showModalexplore, setShowModalexplore] = useState(false);
   const [data, setData] = useState<any>();
   const [showMenu, setShowMenu] = useState(true);
-  const [showDropDown, setShowDropDown] = useState(false)
+  const [showDropDown, setShowDropDown] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLImageElement | null>(null);
 
-  const handleClick = (event:any) => {
+  const handleClick = (event: any) => {
     event.stopPropagation();
     setShowModal((prev) => !prev);
-   
   };
-  const handleClickexplore = (event:any) => {
+  const handleClickexplore = (event: any) => {
     event.stopPropagation();
     setShowModalexplore((prev) => !prev);
-   
   };
   const handleNavbarClick = (event: any, screen: string) => {
     console.log("clickkking");
@@ -66,7 +64,7 @@ export default function RootLayout({
       case "Tasks":
         setShowModal(false);
       case "Explore":
-        setShowModal(false);
+        setShowModalexplore((prev) => !prev);
       case "FileVault":
         setShowModal(false);
       case "Setting":
@@ -85,10 +83,10 @@ export default function RootLayout({
     setShowMenu((prev) => !prev);
   };
 
-  const handleModalChange = (isOpen:boolean) => {
+  const handleModalChange = (isOpen: boolean) => {
     setShowModalexplore(isOpen);
   };
-  const handleModalexploreChange = (isOpen:boolean) => {
+  const handleModalexploreChange = (isOpen: boolean) => {
     setShowModalexplore(isOpen);
   };
 
@@ -121,81 +119,91 @@ export default function RootLayout({
                   {showMenu ? <h5>{nav.text}</h5> : null}
                 </div>
               ))}
-          </div>
-          <div className="relative">
-            {showModal ? (
-             <ChatModal setShowModal={setShowModal} onModalChange={handleModalChange}  />
-            ) : null}
-                 {showModalexplore ? (
-             <ExploreModal setShowModalexplore={setShowModalexplore} 
-             onModalChangeexplore={handleModalexploreChange}  />
-            ) : null}
-          </div>
-          <div className="flex flex-col w-full">
-            <div className="px-10 py-5 ">
-              <div className="flex flex-row gap-5 justify-between">
-                <Image
-                  src={FolderIcon}
-                  alt="FolderIcon"
-                  onClick={handleClickFolder}
-                  style={{ cursor: "pointer" }}
+            </div>
+            <div className="relative">
+              {showModal ? (
+                <ChatModal
+                  setShowModal={setShowModal}
+                  onModalChange={handleModalChange}
                 />
-                <div className="flex flex-row gap-2 items-center relative">
-                  <Image src={UserIcon} alt="UserIcon"  />
-                  <div>
-                    <h5 >AI expert</h5>
-                    {showDropDown ? (
-                      <div
-                        ref={modalRef}
-                        className="absolute top-full left-0 mt-1 bg-white shadow-md rounded-lg p-5 w-max"
-                      >
-                        <div className="flex flex-col items-start gap-1 self-stretch">
-                          {data &&
-                            data.map((item: any) => (
-                              <div className="flex flex-row px-2 py-1 items-center gap-2 self-stretch">
-                                <Image
-                                  src={`${process.env.NEXT_PUBLIC_BASE_URL + item.avatar}`}
-                                  alt={`${item.expert_name}`}
-                                  className="rounded-full"
-                                  width={15}
-                                  height={15}
-                                />
-                                <Link href={`/chat/${item.id}`}>
-                                  <h5  onClick={(event) => handleClickEvent(event)}>
-                                    {item.expert_name}
-                                  </h5>
-                                </Link>
-                              </div>
-                            ))}
-                        </div>
-                      </div>
-                    ) : null}
-                  </div>
+              ) : null}
+              {showModalexplore ? (
+                <ExploreModal
+                  setShowModalexplore={setShowModalexplore}
+                  onModalChangeexplore={handleModalexploreChange}
+                />
+              ) : null}
+            </div>
+            <div className="flex flex-col w-full">
+              <div className="px-10 py-5 ">
+                <div className="flex flex-row gap-5 justify-between">
                   <Image
-                    src={ArrowDownIcon}
-                    alt="ArrowDownIcon"
+                    src={FolderIcon}
+                    alt="FolderIcon"
+                    onClick={handleClickFolder}
                     style={{ cursor: "pointer" }}
-                    onClick={(event) => handleClickEvent(event)}
                   />
-                </div>
-                <div className="flex flex-row gap-6">
-                  <Image src={SearchIcon} alt="SearchIcon" />
-                  <Image src={BellIcon} alt="BellIcon" />
-                  <Image
-                    src={userImage}
-                    alt="UserImage"
-                    className="rounded-full"
-                  />
+                  <div className="flex flex-row gap-2 items-center relative">
+                    <Image src={UserIcon} alt="UserIcon" />
+                    <div>
+                      <h5>AI expert</h5>
+                      {showDropDown ? (
+                        <div
+                          ref={modalRef}
+                          className="absolute top-full left-0 mt-1 bg-white shadow-md rounded-lg p-5 w-max"
+                        >
+                          <div className="flex flex-col items-start gap-1 self-stretch">
+                            {data &&
+                              data.map((item: any) => (
+                                <div className="flex flex-row px-2 py-1 items-center gap-2 self-stretch">
+                                  <Image
+                                    src={`${
+                                      process.env.NEXT_PUBLIC_BASE_URL +
+                                      item.avatar
+                                    }`}
+                                    alt={`${item.expert_name}`}
+                                    className="rounded-full"
+                                    width={15}
+                                    height={15}
+                                  />
+                                  <Link href={`/chat/${item.id}`}>
+                                    <h5
+                                      onClick={(event) =>
+                                        handleClickEvent(event)
+                                      }
+                                    >
+                                      {item.expert_name}
+                                    </h5>
+                                  </Link>
+                                </div>
+                              ))}
+                          </div>
+                        </div>
+                      ) : null}
+                    </div>
+                    <Image
+                      src={ArrowDownIcon}
+                      alt="ArrowDownIcon"
+                      style={{ cursor: "pointer" }}
+                      onClick={(event) => handleClickEvent(event)}
+                    />
+                  </div>
+                  <div className="flex flex-row gap-6">
+                    <Image src={SearchIcon} alt="SearchIcon" />
+                    <Image src={BellIcon} alt="BellIcon" />
+                    <Image
+                      src={userImage}
+                      alt="UserImage"
+                      className="rounded-full"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="flex-1 w-full h-full">
-              {children}
+              <div className="flex-1 w-full h-full">{children}</div>
             </div>
           </div>
-        </div>
-              </Provider>
+        </Provider>
       </body>
     </html>
   );
