@@ -95,9 +95,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-white ">
         <Provider store={store}>
-          <div className="flex flex-row w-screen">
+          <div className="flex flex-row w-full h-screen">
             <div
-              className={`flex flex-col p-5 gap-5 h-screen ${
+              className={`flex flex-col p-5 gap-5  ${
                 showMenu ? "w-[250px]" : "w-[70px]"
               }`}
               style={{ backgroundColor: "#F9F9FA" }}

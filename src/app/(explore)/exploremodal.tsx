@@ -10,7 +10,6 @@ function ExploreModal({
   setShowModalexplore: (show: boolean) => void;
   onModalChangeexplore: (changed: boolean) => void;
 }) {
-
   const handleClick = (event: any) => {
     event.stopPropagation();
     setShowModalexplore(false);
@@ -19,10 +18,13 @@ function ExploreModal({
 
   return (
     <>
-      <div className="absolute top-1 left-5 mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] h-screen overflow-scroll hide-scrollbar">
+      <div className="absolute top-1 left-0 right-0 mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] h-screen overflow-scroll hide-scrollbar">
         <div className="flex flex-col items-start gap-3 self-stretch">
           <div className="flex flex-row justify-between w-full items-center">
-            <div className="rounded-full border flex flex-row" style={{ borderColor: "var(--button-secondary-stroke, #758399)" }}></div>
+            <div
+              className="rounded-full border flex flex-row"
+              style={{ borderColor: "var(--button-secondary-stroke, #758399)" }}
+            ></div>
             <div>
               <Image
                 src={closeButton}
@@ -50,7 +52,9 @@ function ExploreModal({
                 </div>
                 <div className="flex flex-col">
                   <h6 className="text-sm font-medium">{category.title}</h6>
-                  <p className="text-xs text-gray-500">{category.description}</p>
+                  <p className="text-xs text-gray-500">
+                    {category.description}
+                  </p>
                 </div>
               </a>
             </Link>
