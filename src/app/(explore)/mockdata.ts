@@ -19,81 +19,6 @@ export const categories = [
     },
   ];
 
-//   import splunk from "../../src/assets/images/app-2.png"
-// import appTwo from "../../src/assets/images/splunk.png"
-// import appThree from "../../src/assets/images/app-3.jpg"
-// import appfour from "../../src/assets/images/app-4.png"
-// export const agents = [
-//     {
-//       title: 'Security Co-Pilot',
-//       description: 'Talk to Security Expert, Stay Secure!',
-//       image: 'https://via.placeholder.com/48'
-//     },
-//     {
-//       title: 'Incident Handler',
-//       description: 'Consult Incident Handler, Manage crises.',
-//       image: 'https://via.placeholder.com/48'
-//     },
-//     {
-//       title: 'Security Analyst',
-//       description: 'Meet Security Analyst, Analyze threats.',
-//       image: 'https://via.placeholder.com/48'
-//     },
-//     {
-//       title: 'Privacy Expert',
-//       description: 'Discuss with Privacy Consultant, Safeguard data.',
-//       image: 'https://via.placeholder.com/48'
-//     },
-//     {
-//       title: 'My Playbooks',
-//       description: 'Discuss with Privacy Consultant, Safeguard data.',
-//       image: 'https://via.placeholder.com/48'
-//     },
-//     {
-//       title: 'Policy Expert',
-//       description: 'Connect with Pen Tester, Test defenses.',
-//       image: 'https://via.placeholder.com/48'
-//     },
-//   ];
-  // export const applications = [
-  //   {
-  //     id: 1,
-  //     title: 'Splunk Analytics',
-  //     description: 'Integrate Splunk to monitor and analyze machine-generated big data through a web-style interface.',
-  //     image: splunk,
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Atlassian JIRA',
-  //     description: 'Integrates JIRA to provide robust issue tracking and project management capabilities within your application.',
-  //     image: appTwo,
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'VirusTotal Malware Analysis',
-  //     description: 'Uses VirusTotal to analyze suspicious files and URLs to detect types of malware.',
-  //     image: appfour,
-  //   },
-  //   {
-  //     id: 4,
-  //     title: 'Tenable Vulnerability Management',
-  //     description: 'Provides comprehensive vulnerability scanning capabilities using Tenable to enhance security posture.',
-  //     image: appThree,
-  //   },
-  //   {
-  //     id: 5,
-  //     title: 'QRadar SIEM',
-  //     description: 'This expert will tell you everything you ask about IP Addresses.',
-  //     image:splunk,
-  //   },
-  //   {
-  //     id: 6,
-  //     title: 'IP Lookup Tool',
-  //     description: 'Provides IP address lookup and geolocation services to identify and trace IP addresses.',
-  //     image: appfour,
-  //   },
-  // ];
-
   export const categorie = [
     "Writing",
     "Productivity",
@@ -164,4 +89,88 @@ export const categories = [
     "Research & Analysis",
     "Programming"
   ];
+
+
+  // import splunk from "../../src/assets/images/app-2.png"
+  // import appTwo from "../../src/assets/images/splunk.png"
+  // import appThree from "../../src/assets/images/app-3.jpg"
+  // import appfour from "../../src/assets/images/app-4.png"
+  export const staticagents = [
+      {
+        title: 'Security Co-Pilot',
+        description: 'Talk to Security Expert, Stay Secure!',
+        image: 'https://via.placeholder.com/48'
+      },
+      {
+        title: 'Incident Handler',
+        description: 'Consult Incident Handler, Manage crises.',
+        image: 'https://via.placeholder.com/48'
+      },
+      {
+        title: 'Security Analyst',
+        description: 'Meet Security Analyst, Analyze threats.',
+        image: 'https://via.placeholder.com/48'
+      },
+      {
+        title: 'Privacy Expert',
+        description: 'Discuss with Privacy Consultant, Safeguard data.',
+        image: 'https://via.placeholder.com/48'
+      },
+      {
+        title: 'My Playbooks',
+        description: 'Discuss with Privacy Consultant, Safeguard data.',
+        image: 'https://via.placeholder.com/48'
+      },
+      {
+        title: 'Policy Expert',
+        description: 'Connect with Pen Tester, Test defenses.',
+        image: 'https://via.placeholder.com/48'
+      },
+    ];
+    export const applications = [
+      {
+        id: 1,
+        title: 'Splunk Analytics',
+        description: 'Integrate Splunk to monitor and analyze machine-generated big data through a web-style interface.',
+        image:" splunk",
+      },
+      {
+        id: 2,
+        title: 'Atlassian JIRA',
+        description: 'Integrates JIRA to provide robust issue tracking and project management capabilities within your application.',
+        image: "appTwo",
+      },
+      {
+        id: 3,
+        title: 'VirusTotal Malware Analysis',
+        description: 'Uses VirusTotal to analyze suspicious files and URLs to detect types of malware.',
+        image: "appfour",
+      },
+      {
+        id: 4,
+        title: 'Tenable Vulnerability Management',
+        description: 'Provides comprehensive vulnerability scanning capabilities using Tenable to enhance security posture.',
+        image: "appThree",
+      },
+      {
+        id: 5,
+        title: 'QRadar SIEM',
+        description: 'This expert will tell you everything you ask about IP Addresses.',
+        image:"splunk",
+      },
+      {
+        id: 6,
+        title: 'IP Lookup Tool',
+        description: 'Provides IP address lookup and geolocation services to identify and trace IP addresses.',
+        image: "appfour",
+      },
+    ];
+  
+  
+    
+
+  
+  
+   
+  
   
