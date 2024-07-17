@@ -1,11 +1,11 @@
-
+"use client"
 import Header from "./header";
 import MainContent from "./maincontent";
 import SearchFilter from "./categories";
 
-const Agents: React.FC = () => {
+const Doc: React.FC = () => {
   return (
-    <div className="flex h-screen bg-white px-6">
+    <div className="flex h-screen bg-white ">
       <div className="flex-1 flex flex-col">
         <Header />
         <SearchFilter />
@@ -15,4 +15,4 @@ const Agents: React.FC = () => {
   );
 };
 
-export default Agents;
+export default Doc;
