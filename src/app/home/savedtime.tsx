@@ -107,7 +107,7 @@ const SavedTime: React.FC<SavedTimeProps> = ({ data }) => {
   };
 
   return (
-    <div className="flex flex-col gap-3 h-[420px] w-[325px] overflow-scroll items-start justify-between p-4 shrink-0 rounded-3xl bg-gray-100 hide-scrollbar">
+    <div className="flex flex-col gap-3 h-2/3 w-[325px] overflow-scroll items-start justify-between p-4 shrink-0 rounded-3xl bg-gray-100 hide-scrollbar">
       <div className="flex flex-row items-center justify-between w-full">
         <div
           className="flex flex-row gap-2 items-center border p-2 rounded-2xl"

@@ -12,7 +12,7 @@ function Experts({ data, key }: { data: any; key: any }) {
   const base_url = process.env.NEXT_PUBLIC_BASE_URL;
   return (
     <>
-      <div className="flex flex-col gap-3 h-[420px] w-[325px] overflow-scroll items-start justify-between p-4 shrink-0 rounded-[var(--Radius-Radius---M,24px)] bg-gray-100 hide-scrollbar">
+      <div className="flex flex-col gap-3 h-2/3 w-[325px] overflow-scroll items-start justify-between p-4 shrink-0 rounded-[var(--Radius-Radius---M,24px)] bg-gray-100 hide-scrollbar">
         <div className="flex flex-row items-center justify-between w-full">
           <div
             className="flex flex-row gap-2 items-center border p-2 rounded-2xl"
