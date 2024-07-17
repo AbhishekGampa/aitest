@@ -93,16 +93,14 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-white ">
+      <body className="bg-white">
         <Provider store={store}>
-          <div className="flex flex-row w-full h-full">
+          <div className="flex flex-row w-full h-screen">
             <div
-              className={`flex flex-col p-5 gap-5  ${
-                showMenu ? "w-[250px]" : "w-[70px]"
-              }`}
+              className="flex flex-col p-5 gap-5 w-max"
               style={{ backgroundColor: "#F9F9FA" }}
             >
-              <div className=" flex flex-row gap-3">
+              <div className=" flex flex-row gap-3 w-max">
                 <Image src={logo} alt="logo" />
                 {showMenu ? (
                   <Image src={vectorline} alt="vector" width={3} />
@@ -145,7 +143,12 @@ export default function RootLayout({
                     style={{ cursor: "pointer" }}
                   />
                   <div className="flex flex-row gap-2 items-center relative">
-                    <Image src={UserIcon} alt="UserIcon" />
+                    <Image
+                      src={UserIcon}
+                      alt="UserIcon"
+                      width={20}
+                      height={20}
+                    />
                     <div>
                       <h5>AI expert</h5>
                       {showDropDown ? (
@@ -157,6 +160,8 @@ export default function RootLayout({
                       alt="ArrowDownIcon"
                       style={{ cursor: "pointer" }}
                       onClick={(event) => handleClickEvent(event)}
+                      width={10}
+                      height={10}
                     />
                   </div>
                   <div className="flex flex-row gap-6">

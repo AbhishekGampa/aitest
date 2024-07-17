@@ -5,7 +5,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_LOCAL_URL,
   prepareHeaders: (headers) => {
     const token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjMca3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjExOTk2NDgsIm5iZiI6MTcyMTE5OTY0OCwianRpIjoiNTdiOWNiNGMtYmE2ZC00ZjQ1LWExYjEtNzQ2OWJmMThmZjQwIiwiZXhwIjoxNzIxMjg2MDQ4LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.u-2OBqBQtElnSY6B_C2bXpsw5NifydYbKWpxXY4ztkY";
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjM3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjEyMjE3MzIsIm5iZiI6MTcyMTIyMTczMiwianRpIjoiMTVjZDFkOTUtMTczOS00NWZjLWI5MmYtY2IzZWJkNzI0ZGZiIiwiZXhwIjoxNzIxMzA4MTMyLCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.IDaSyx3mB4zh_lymTfv5f6FY0wOoPEyIhD66lN1zYjE";
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }

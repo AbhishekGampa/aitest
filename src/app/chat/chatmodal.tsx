@@ -8,23 +8,43 @@ import {
   useState,
 } from "react";
 import closeButton from "../../Images/closeButton.svg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type ChatModalProps = {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   onModalChange: (isOpen: boolean) => void;
 };
 
+const LoadingModal = () => (
+  <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="bg-white p-5 rounded-lg flex justify-center items-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+  </div>
+);
+
 const ChatModal = forwardRef<HTMLDivElement, ChatModalProps>(
   ({ setShowModal, onModalChange }) => {
-    const { data } = useGetExpertsQuery({});
+    const { data, isLoading, error } = useGetExpertsQuery({});
     const handleClick = (event: any) => {
       event.stopPropagation();
       setShowModal(false);
       onModalChange(false);
     };
 
+    useEffect(() => {
+      if (error?.data?.detail || error?.detail) {
+        const errorMessage = error?.data?.detail || error?.detail;
+        console.log("error: ", errorMessage);
+        toast.error(`Error: ${errorMessage}`);
+      }
+    }, [error]);
+
     return (
       <>
+        {isLoading && <LoadingModal />}
+        <ToastContainer />
         <div
           className="absolute top-1 left-0 right-0 mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] h-screen overflow-scroll hide-scrollbar"
           style={{ height: "calc(100vh - 1.2rem)" }}
