@@ -1,10 +1,10 @@
 "use client";
-import { Input } from "@/components/ui/input";
 import addIcon from "@/Images/addIcon.svg";
 import sendIcon from "@/Images/sendIcon.svg";
 import Image from "next/image";
 import vectorIcon from "@/Images/Vector.svg";
 import { useRef } from "react";
+import { Input } from "@/components/ui/input";
 
 function ChatList({ data }: { data: any }) {
   console.log("ChatList data: ", data);
@@ -14,8 +14,8 @@ function ChatList({ data }: { data: any }) {
     console.log(textref.current?.value);
   };
   return (
-    <>
-      <div className="px-10 mt-7 h-[70%]">
+    <div className="flex flex-col">
+      <div className="px-10 mt-7">
         <div>
           <div className="flex flex-col">
             <div
@@ -30,9 +30,11 @@ function ChatList({ data }: { data: any }) {
           </div>
         </div>
       </div>
-      <div className="px-10">
-        <div className="flex items-center">
+      <div className="flex-1"></div>
+      <div className="px-10 py-1 bg-red-400">
+        <div className="flex relative">
           <Input
+            type="text"
             className="rounded-lg relative h-12 pl-14 focus:outline-none focus:border-none focus:ring-0"
             placeholder="Ask or search for anything. Use @ to mention AI expert or / to run a task"
             style={{ backgroundColor: "#f9f9fa" }}
@@ -53,18 +55,17 @@ function ChatList({ data }: { data: any }) {
             width={2}
             className="absolute ml-8"
           />
-
           <Image
             src={sendIcon}
             alt="sendIcon"
             height={40}
             width={40}
-            className="absolute right-12 cursor-pointer"
+            className="absolute right-0 cursor-pointer"
             onClick={handleClick}
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

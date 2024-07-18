@@ -8,9 +8,11 @@ import SaveAutomation from "./home/saveautomation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingModal from "../components/ui/loading";
+import { useSelector } from "react-redux";
 
 function Home() {
   const { data, error, isLoading } = useGetDashboardDataQuery({});
+ 
 
   React.useEffect(() => {
     if (error?.data?.detail || error?.detail) {
@@ -37,8 +39,9 @@ function Home() {
             How can I help you today?
           </div>
         </div>
-        <div className="mt-5  flex flex-row gap-4 overflow-scroll hide-scrollbar">
+        <div className="mt-5 flex flex-row gap-4 overflow-scroll hide-scrollbar w-full">
           <>
+            {/* {Array(10).fill('').map(()=><div className="w-[200px] h-[300px] m-2 bg-blue-400 flex-shrink-0"></div>)} */}
             {data?.map((item: any, index: any) =>
               item.card_type === "expert" ? (
                 <Experts key={index} data={item} />

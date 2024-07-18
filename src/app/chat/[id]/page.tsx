@@ -13,7 +13,6 @@ function Chats(req: any) {
     <>
       <ChatTop {...expertData} />
       <ChatList data={expertData} />
-      <div></div>
     </>
   );
 }

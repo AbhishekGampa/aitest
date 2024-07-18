@@ -26,6 +26,9 @@ import ExploreModal from "./(explore)/exploremodal";
 import { useRouter } from "next/navigation";
 import { navLinks } from "@/utils/constants";
 import ChatDropDown from "./chat/chatdropdown";
+import SideNavBar from "@/components/SideNavBar";
+import AppHeader from "@/components/AppHeader";
+import PageWrapper from "@/components/PageWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -82,33 +85,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-white hide-scrollbar">
+      <body className="bg-white h-screen w-screen">
         <Provider store={store}>
-          <div className="flex flex-row w-full h-screen">
-            <div
-              className="flex flex-col p-5 gap-5 w-max"
-              style={{ backgroundColor: "#F9F9FA" }}
-            >
-              <div className=" flex flex-row gap-3 w-max">
-                <Image src={logo} alt="logo" />
-                {showMenu ? (
-                  <Image src={vectorline} alt="vector" width={3} />
-                ) : null}
-                {showMenu ? (
-                  <Image src={companylogo} alt="companylogo" />
-                ) : null}
-              </div>
-              {navLinks.map((nav: any) => (
-                <div
-                  key={nav.text}
-                  className="flex flex-row gap-3 cursor-pointer"
-                  onClick={(e) => handleNavbarClick(e, nav.text)}
-                >
-                  <Image src={nav.icon} alt={nav.alt} />
-                  {showMenu ? <h5>{nav.text}</h5> : null}
-                </div>
-              ))}
-            </div>
+          <div className="h-full w-full flex flex-row">
+            <SideNavBar
+              showMenu={showMenu}
+              handleNavbarClick={handleNavbarClick}
+            />
             <div className="relative">
               {showModal ? (
                 <ChatModal
@@ -123,50 +106,14 @@ export default function RootLayout({
                 />
               ) : null}
             </div>
-            <div className="flex flex-col w-full overflow-hidden">
-              <div className="px-10 py-5 ">
-                <div className="flex flex-row gap-5 justify-between">
-                  <Image
-                    src={FolderIcon}
-                    alt="FolderIcon"
-                    onClick={handleClickFolder}
-                    style={{ cursor: "pointer" }}
-                  />
-                  <div className="flex flex-row gap-2 items-center relative">
-                    <Image
-                      src={UserIcon}
-                      alt="UserIcon"
-                      width={20}
-                      height={20}
-                    />
-                    <div>
-                      <h5>AI expert</h5>
-                      {showDropDown ? (
-                        <ChatDropDown setShowDropDown={setShowDropDown} />
-                      ) : null}
-                    </div>
-                    <Image
-                      src={ArrowDownIcon}
-                      alt="ArrowDownIcon"
-                      style={{ cursor: "pointer" }}
-                      onClick={(event) => handleClickEvent(event)}
-                      width={10}
-                      height={10}
-                    />
-                  </div>
-                  <div className="flex flex-row gap-6">
-                    <Image src={SearchIcon} alt="SearchIcon" />
-                    <Image src={BellIcon} alt="BellIcon" />
-                    <Image
-                      src={userImage}
-                      alt="UserImage"
-                      className="rounded-full"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full overflow-hidden">{children}</div>
+            <div className="flex flex-col w-full">
+              <AppHeader
+                handleClickEvent={handleClickEvent}
+                handleClickFolder={handleClickFolder}
+                setShowDropDown={setShowDropDown}
+                showDropDown={showDropDown}
+              />
+              <PageWrapper>{children}</PageWrapper>
             </div>
           </div>
         </Provider>
