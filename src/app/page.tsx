@@ -7,14 +7,8 @@ import SavedTime from "./home/savedtime";
 import SaveAutomation from "./home/saveautomation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoadingModal from "../components/ui/loading";
 
-const LoadingModal = () => (
-  <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white p-5 rounded-lg flex justify-center items-center">
-      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-    </div>
-  </div>
-);
 
 function Home() {
   const { data, error, isLoading } = useGetDashboardDataQuery({});
@@ -44,7 +38,7 @@ function Home() {
             How can I help you today?
           </div>
         </div>
-        <div className="mt-5 flex flex-row gap-4 overflow-scroll hide-scrollbar">
+        <div className="mt-5  flex flex-row gap-4 overflow-scroll hide-scrollbar" style={{ width: "calc(100vw - 20vw)" }}>
           <>
             {data?.map((item: any, index: any) =>
               item.card_type === "expert" ? (

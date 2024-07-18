@@ -10,19 +10,13 @@ import {
 import closeButton from "../../Images/closeButton.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoadingModal from "@/components/ui/loading";
 
 type ChatModalProps = {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   onModalChange: (isOpen: boolean) => void;
 };
 
-const LoadingModal = () => (
-  <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white p-5 rounded-lg flex justify-center items-center">
-      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-    </div>
-  </div>
-);
 
 const ChatModal = forwardRef<HTMLDivElement, ChatModalProps>(
   ({ setShowModal, onModalChange }) => {
@@ -76,7 +70,7 @@ const ChatModal = forwardRef<HTMLDivElement, ChatModalProps>(
               </h5>
             </div>
             {data?.map((item: any) => (
-              <div className="flex justify-between items-center">
+              <div key={item.id} className="flex justify-between items-center">
                 <div
                   className="flex flex-row w-[300px] py-1 items-center gap-2 self-stretch hover:backdrop-blur-md hover:bg-gray-200 rounded-lg "
                   style={{ padding: "12px" }}
@@ -105,5 +99,7 @@ const ChatModal = forwardRef<HTMLDivElement, ChatModalProps>(
     );
   }
 );
+
+ChatModal.displayName = 'ChatModal';
 
 export default ChatModal;

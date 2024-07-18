@@ -93,7 +93,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-white">
+      <body className="bg-white hide-scrollbar">
         <Provider store={store}>
           <div className="flex flex-row w-full h-screen">
             <div
@@ -111,6 +111,7 @@ export default function RootLayout({
               </div>
               {navLinks.map((nav: any) => (
                 <div
+                  key={nav.text} 
                   className="flex flex-row gap-3 cursor-pointer"
                   onClick={(e) => handleNavbarClick(e, nav.text)}
                 >

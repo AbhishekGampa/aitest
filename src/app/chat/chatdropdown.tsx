@@ -16,7 +16,7 @@ return(
     <div className="flex flex-col items-start gap-1 self-stretch ">
       {data &&
         data.map((item: any) => (
-          <div className="flex flex-row px-2 py-1 items-center gap-2 self-stretch hover:backdrop-blur-md hover:bg-gray-200 rounded-lg">
+          <div key={item.id} className="flex flex-row px-2 py-1 items-center gap-2 self-stretch hover:backdrop-blur-md hover:bg-gray-200 rounded-lg">
             <Image
               src={`${
                 process.env.NEXT_PUBLIC_BASE_URL +

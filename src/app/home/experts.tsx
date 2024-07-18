@@ -13,7 +13,7 @@ function Experts({ data, key }: { data: any; key: any }) {
   const base_url = process.env.NEXT_PUBLIC_BASE_URL;
   return (
     <>
-      <div className="flex flex-col gap-3 h-[495px] w-max overflow-scroll items-start justify-between p-4 shrink-0 rounded-[var(--Radius-Radius---M,24px)] bg-gray-100 hide-scrollbar">
+      <div className="flex flex-col gap-3 h-[450px] w-[340px] overflow-scroll items-start justify-between p-4 shrink-0 rounded-[var(--Radius-Radius---M,24px)] bg-gray-100 hide-scrollbar">
         <div className="flex flex-row items-center justify-between w-full">
           <div
             className="flex flex-row gap-2 items-center border p-2 rounded-2xl"
@@ -38,7 +38,7 @@ function Experts({ data, key }: { data: any; key: any }) {
         </div>
         <div className="flex flex-col w-full">
           {expertData?.map((item: any) => (
-            <div className="flex flex-row gap-4 p-3 hover:backdrop-blur-md hover:bg-gray-200 rounded-lg w-full group">
+            <div key={item.id} className="flex flex-row gap-4 p-3 hover:backdrop-blur-md hover:bg-gray-200 rounded-lg w-full group">
               <Image
                 src={`${base_url + item.avatar}`}
                 alt={item.expert_name}
