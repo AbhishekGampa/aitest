@@ -31,11 +31,10 @@ function ChatList({ data }: { data: any }) {
         </div>
       </div>
       <div className="flex-grow bg-red-300 overflow-auto hide-scrollbar">
-        {/* <div className="h-[1000px] bg-green-300"></div> */}
         {Array(10).fill('').map(()=><div className="h-[100px] w-[100px] bg-green-300 mb-10"></div>)}
       </div>
-      <div className="px-10 py-1 absolute left-0 bottom-2 right-0">
-        <div className="flex relative">
+      <div className="px-10 py-2 absolute left-0 bottom-0 right-0 bg-white">
+        <div className="flex relative mb-2">
           <Input
             type="text"
             className="rounded-lg relative h-12 pl-14 focus:outline-none focus:border-none focus:ring-0"
