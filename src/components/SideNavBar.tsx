@@ -14,7 +14,7 @@ const SideNavBar = ({ showMenu, handleNavbarClick }: SideNavBarProps) => {
   return (
     <div
       className="flex flex-col p-5 gap-5"
-      style={{ backgroundColor: "#F9F9FA", width: showMenu ? "20vw" : "5vw" }}
+      style={{ backgroundColor: "#F9F9FA", width: showMenu ? "24vw" : "5vw" }}
     >
       <div className=" flex flex-row gap-3">
         <Image src={logo} alt="logo" />

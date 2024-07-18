@@ -10,10 +10,10 @@ function Chats(req: any) {
   const { data: chatData } = useGetChatIdQuery(expertId);
   console.log("chatData: ", chatData);
   return (
-    <>
+    <div className="h-full flex flex-col">
       <ChatTop {...expertData} />
       <ChatList data={expertData} />
-    </>
+    </div>
   );
 }
 

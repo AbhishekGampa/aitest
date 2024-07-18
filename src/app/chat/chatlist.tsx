@@ -14,7 +14,7 @@ function ChatList({ data }: { data: any }) {
     console.log(textref.current?.value);
   };
   return (
-    <div className="flex flex-col">
+    <div className="flex-grow relative flex flex-col overflow-auto">
       <div className="px-10 mt-7">
         <div>
           <div className="flex flex-col">
@@ -30,8 +30,11 @@ function ChatList({ data }: { data: any }) {
           </div>
         </div>
       </div>
-      <div className="flex-1"></div>
-      <div className="px-10 py-1 bg-red-400">
+      <div className="flex-grow bg-red-300 overflow-auto hide-scrollbar">
+        {/* <div className="h-[1000px] bg-green-300"></div> */}
+        {Array(10).fill('').map(()=><div className="h-[100px] w-[100px] bg-green-300 mb-10"></div>)}
+      </div>
+      <div className="px-10 py-1 absolute left-0 bottom-2 right-0">
         <div className="flex relative">
           <Input
             type="text"
