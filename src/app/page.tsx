@@ -9,7 +9,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingModal from "../components/ui/loading";
 
-
 function Home() {
   const { data, error, isLoading } = useGetDashboardDataQuery({});
 
@@ -26,7 +25,7 @@ function Home() {
     <>
       {isLoading && <LoadingModal />}
       <ToastContainer />
-      <div className="px-10 ">
+      <div className="px-10 w-full overflow-hidden">
         <div className="flex flex-col">
           <div
             className="text-2xl font-normal font-display "
@@ -38,7 +37,7 @@ function Home() {
             How can I help you today?
           </div>
         </div>
-        <div className="mt-5  flex flex-row gap-4 overflow-scroll hide-scrollbar" style={{ width: "calc(100vw - 20vw)" }}>
+        <div className="mt-5  flex flex-row gap-4 overflow-scroll hide-scrollbar">
           <>
             {data?.map((item: any, index: any) =>
               item.card_type === "expert" ? (

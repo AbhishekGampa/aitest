@@ -37,20 +37,9 @@ export default function RootLayout({
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [showModalexplore, setShowModalexplore] = useState(false);
-  const [data, setData] = useState<any>();
   const [showMenu, setShowMenu] = useState(true);
   const [showDropDown, setShowDropDown] = useState(false);
-  const modalRef = useRef<HTMLDivElement | null>(null);
-  const buttonRef = useRef<HTMLImageElement | null>(null);
 
-  const handleClick = (event: any) => {
-    event.stopPropagation();
-    setShowModal((prev) => !prev);
-  };
-  const handleClickexplore = (event: any) => {
-    event.stopPropagation();
-    setShowModalexplore((prev) => !prev);
-  };
   const handleNavbarClick = (event: any, screen: string) => {
     console.log("clickkking");
     event.stopPropagation();
@@ -111,7 +100,7 @@ export default function RootLayout({
               </div>
               {navLinks.map((nav: any) => (
                 <div
-                  key={nav.text} 
+                  key={nav.text}
                   className="flex flex-row gap-3 cursor-pointer"
                   onClick={(e) => handleNavbarClick(e, nav.text)}
                 >
@@ -134,7 +123,7 @@ export default function RootLayout({
                 />
               ) : null}
             </div>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full overflow-hidden">
               <div className="px-10 py-5 ">
                 <div className="flex flex-row gap-5 justify-between">
                   <Image
@@ -177,7 +166,7 @@ export default function RootLayout({
                 </div>
               </div>
 
-              <div className="flex-1 w-full h-full">{children}</div>
+              <div className="w-full overflow-hidden">{children}</div>
             </div>
           </div>
         </Provider>
