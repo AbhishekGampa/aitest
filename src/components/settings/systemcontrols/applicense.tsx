@@ -1,11 +1,10 @@
-
 "use client";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
   useGetConfigQuery,
   useUpdateConfigMutation,
-} from "../../../rtkquery/config";
+} from "../../../store/api/config";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Switch } from "@/components/ui/switch";
@@ -91,21 +90,21 @@ const ZySecAppAndSettings = () => {
         </div>
       </div>
       <div className="flex justify-between">
-      <div className="text-xl font-bold">ZySec App ID & Secret</div>
-      <Button onClick={isEditing ? handleSave : handleEdit} variant="outline">
-        {isEditing ? (
-          <>
-            <BiCheck style={{ fontSize: "1.5rem" }} />
-            Save
-          </>
-        ) : (
-          <>
-            <BiEditAlt style={{ fontSize: "1.5rem" }} />
-            Edit
-          </>
-        )}
-      </Button>
-</div>
+        <div className="text-xl font-bold">ZySec App ID & Secret</div>
+        <Button onClick={isEditing ? handleSave : handleEdit} variant="outline">
+          {isEditing ? (
+            <>
+              <BiCheck style={{ fontSize: "1.5rem" }} />
+              Save
+            </>
+          ) : (
+            <>
+              <BiEditAlt style={{ fontSize: "1.5rem" }} />
+              Edit
+            </>
+          )}
+        </Button>
+      </div>
       <div className=" px-2">
         <Label>App ID</Label>
         <Input
