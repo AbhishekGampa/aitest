@@ -17,7 +17,13 @@ const baseQuery = fetchBaseQuery({
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  tagTypes: ["chatexperts","chatexpertbyid","chatid"],
+  tagTypes: [
+    "chatexperts",
+    "chatexpertbyid",
+    "chatid",
+    "applications",
+    "prompt_chat",
+  ],
   baseQuery,
   endpoints: () => ({}),
 });

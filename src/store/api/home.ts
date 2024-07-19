@@ -14,9 +14,13 @@ const baseQuery = fetchBaseQuery({
 
 export const homeapis = createApi({
   reducerPath: "dashboard",
+  tagTypes: ["dashboard"],
   baseQuery,
   endpoints: (builder) => ({
-    getDashboardData: builder.query({ query: () => "/dashboard" }),
+    getDashboardData: builder.query({
+      providesTags: ["dashboard"],
+      query: () => "/dashboard",
+    }),
   }),
 });
 
