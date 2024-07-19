@@ -41,7 +41,7 @@ const ChatModal = forwardRef<HTMLDivElement, ChatModalProps>(
         <ToastContainer />
         <div
           className="absolute top-1 left-0 right-0 mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] h-screen overflow-scroll hide-scrollbar"
-          style={{ height: "calc(100vh - 1.2rem)" }}
+          // style={{ height: "calc(100vh - 1.2rem)" }}
         >
           <div className="flex flex-col items-start gap-3 self-stretch">
             <div className="flex flex-row justify-between w-full items-center">

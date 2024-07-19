@@ -103,7 +103,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="px-10" style={{ width: "calc(100vw - 14vw)" }}>
+    <div className="px-10" >
       <div className="flex flex-col">
         <div
           className="text-2xl font-normal font-display "
@@ -158,13 +158,12 @@ const DashboardPage = () => {
           </div>
         ))}
       </div>
-      <div className="h-[60%]">
+      <div className="w-84vw">
         {filteredData?.[0]?.metadata[0].stats ? (
           <Line
             data={chartData}
             options={chartOptions}
-            width={400}
-            height={200}
+            style={{ width: "80vw" }}
           />
         ) : null}
       </div>
