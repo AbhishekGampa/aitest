@@ -13,6 +13,7 @@ import ChatDropDown from "../components/chat/chatdropdown";
 import SideNavBar from "@/components/navigation/SideNavBar";
 import AppHeader from "@/components/navigation/AppHeader";
 import PageWrapper from "@/components/navigation/PageWrapper";
+import SettingsModal from "@/components/settings/settingsmodal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +24,9 @@ export default function RootLayout({
 }>) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
-  console.log('showModal: ', showModal);
+  console.log("showModal: ", showModal);
   const [showsettingsmodal, setShowsettingsmodal] = useState(false);
+  console.log("showsettingsmodal: ", showsettingsmodal);
   console.log(showsettingsmodal);
   const [showModalexplore, setShowModalexplore] = useState(false);
   const [showMenu, setShowMenu] = useState(true);
@@ -98,6 +100,12 @@ export default function RootLayout({
                   <ExploreModal
                     setShowModalexplore={setShowModalexplore}
                     onModalChangeexplore={handleModalexploreChange}
+                  />
+                ) : null}
+                {showsettingsmodal ? (
+                  <SettingsModal
+                    setShowModalsettings={setShowsettingsmodal}
+                    onModalChangesettings={handleModalsettingsChange}
                   />
                 ) : null}
               </div>
