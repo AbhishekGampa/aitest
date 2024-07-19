@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import closeButton from "../../Images/closeButton.svg";
-import { settingsModal } from "../(explore)/mockdata";
-
+import { settingsModal } from "../explore/mockdata";
 
 function SettingsModal({
   setShowModalsettings,
@@ -52,12 +51,19 @@ function SettingsModal({
                   {typeof category.icon === "string" ? (
                     category.icon
                   ) : (
-                    <Image src={category.icon} alt={category.title} width={24} height={24} />
+                    <Image
+                      src={category.icon}
+                      alt={category.title}
+                      width={24}
+                      height={24}
+                    />
                   )}
                 </div>
                 <div className="flex flex-col">
                   <h6 className="text-sm font-medium">{category.title}</h6>
-                  <p className="text-xs text-gray-500 mt-1">{category.description}</p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {category.description}
+                  </p>
                 </div>
               </a>
             </Link>

@@ -1,25 +1,24 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import { FiSearch, FiFilter, FiChevronDown } from 'react-icons/fi';
-import CreateAssistantModal from './createassistant';
-
+"use client";
+import React, { useState, useEffect } from "react";
+import { FiSearch, FiFilter, FiChevronDown } from "react-icons/fi";
+import CreateAssistantModal from "./createassistant";
 
 const Header: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = "auto";
   };
 
   useEffect(() => {
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, []);
 

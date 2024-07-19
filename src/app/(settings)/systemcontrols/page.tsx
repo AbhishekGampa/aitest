@@ -1,6 +1,6 @@
 import React from "react";
-import ZySecAppAndSettings from "./applicense";
-import Mode from "./cyberpodmode";
+import ZySecAppAndSettings from "../../../components/settings/systemcontrols/applicense";
+import Mode from "../../../components/settings/systemcontrols/cyberpodmode";
 
 
 const SystemSetting = () => {

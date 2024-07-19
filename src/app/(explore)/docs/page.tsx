@@ -1,6 +1,6 @@
-"use client"
-import Header from "./header";
-import MainContent from "./maincontent";
+"use client";
+import Header from "../../../components/explore/docs/header";
+import MainContent from "../../../components/explore/docs/maincontent";
 import SearchFilter from "./categories";
 
 const Doc: React.FC = () => {

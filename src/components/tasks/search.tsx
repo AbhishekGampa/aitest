@@ -1,30 +1,38 @@
-"use client"
-import React, { useRef } from 'react';
-import { taskcat } from '../(explore)/mockdata';
+"use client";
+import React, { useRef } from "react";
+import { taskcat } from "../explore/mockdata";
 
 const SearchFilter: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const handleMouseDown = (event: React.MouseEvent) => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.dataset.isDragging = 'true';
-      scrollContainerRef.current.dataset.startX = String(event.pageX - scrollContainerRef.current.offsetLeft);
-      scrollContainerRef.current.dataset.scrollLeft = String(scrollContainerRef.current.scrollLeft);
+      scrollContainerRef.current.dataset.isDragging = "true";
+      scrollContainerRef.current.dataset.startX = String(
+        event.pageX - scrollContainerRef.current.offsetLeft
+      );
+      scrollContainerRef.current.dataset.scrollLeft = String(
+        scrollContainerRef.current.scrollLeft
+      );
     }
   };
 
   const handleMouseMove = (event: React.MouseEvent) => {
-    if (scrollContainerRef.current && scrollContainerRef.current.dataset.isDragging === 'true') {
+    if (
+      scrollContainerRef.current &&
+      scrollContainerRef.current.dataset.isDragging === "true"
+    ) {
       event.preventDefault();
       const x = event.pageX - scrollContainerRef.current.offsetLeft;
       const walk = x - Number(scrollContainerRef.current.dataset.startX);
-      scrollContainerRef.current.scrollLeft = Number(scrollContainerRef.current.dataset.scrollLeft) - walk;
+      scrollContainerRef.current.scrollLeft =
+        Number(scrollContainerRef.current.dataset.scrollLeft) - walk;
     }
   };
 
   const handleMouseUp = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.dataset.isDragging = 'false';
+      scrollContainerRef.current.dataset.isDragging = "false";
     }
   };
 
@@ -39,7 +47,10 @@ const SearchFilter: React.FC = () => {
         onMouseLeave={handleMouseUp}
       >
         {taskcat.map((category, index) => (
-          <div key={index} className="px-4 py-2 text-sm bg-gray-100 rounded-3xl max-w-fit whitespace-nowrap">
+          <div
+            key={index}
+            className="px-4 py-2 text-sm bg-gray-100 rounded-3xl max-w-fit whitespace-nowrap"
+          >
             {category}
           </div>
         ))}

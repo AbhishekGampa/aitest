@@ -1,10 +1,9 @@
 "use client";
 
-import React from 'react';
-import ApplicationCard from './applicationcards';
-import { useGetApplicationsQuery } from '@/store/api/applicationsapis';
-import { applications } from '../mockdata';
-
+import React from "react";
+import ApplicationCard from "./applicationcards";
+import { useGetApplicationsQuery } from "@/store/api/applicationsapis";
+import { applications } from "../mockdata";
 
 const MainContent: React.FC = () => {
   const { data, isLoading, isError } = useGetApplicationsQuery({});

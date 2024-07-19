@@ -1,7 +1,6 @@
-import React from 'react';
-import DocCard from './doccards';
-import { docData } from '../mockdata';
-
+import React from "react";
+import DocCard from "./doccards";
+import { docData } from "../mockdata";
 
 const MainContent: React.FC = () => {
   return (

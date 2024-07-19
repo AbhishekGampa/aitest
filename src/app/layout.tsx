@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import ChatModal from "../components/chat/chatmodal";
-import ExploreModal from "./(explore)/exploremodal";
+import ExploreModal from "@/components/explore/exploremodal";
 import { useRouter } from "next/navigation";
 import { navLinks } from "@/utils/constants";
 import ChatDropDown from "../components/chat/chatdropdown";

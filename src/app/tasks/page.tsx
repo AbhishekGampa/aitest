@@ -1,8 +1,6 @@
-
-
-import Header from "./header";
-import MainContent from "./maincontent";
-import SearchFilter from "./search";
+import Header from "../../components/tasks/header";
+import MainContent from "../../components/tasks/maincontent";
+import SearchFilter from "../../components/tasks/search";
 
 const Tasks: React.FC = () => {
   return (

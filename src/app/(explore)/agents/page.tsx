@@ -1,6 +1,5 @@
-
-import Header from "./header";
-import MainContent from "./maincontent";
+import Header from "../../../components/explore/agents/header";
+import MainContent from "../../../components/explore/agents/maincontent";
 import SearchFilter from "./categories";
 
 const Agents: React.FC = () => {

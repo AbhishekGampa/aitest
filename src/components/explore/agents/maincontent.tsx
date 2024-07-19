@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 import { useGetExpertsQuery } from "@/store/api/chatapis";
-import { staticagents } from '../mockdata';
-import AgentCard from './agentcards';
-import Modal from './agentdetails';
-
-
+import { staticagents } from "../mockdata";
+import AgentCard from "./agentcards";
+import Modal from "./agentdetails";
 
 const MainContent: React.FC = () => {
   const { data, isLoading, isError } = useGetExpertsQuery({});
@@ -18,11 +16,14 @@ const MainContent: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  const agents = isError || !data ? staticagents : data.map((expert: any) => ({
-    title: expert.expert_name,
-    description: expert.description,
-    image: expert.avatar
-  }));
+  const agents =
+    isError || !data
+      ? staticagents
+      : data.map((expert: any) => ({
+          title: expert.expert_name,
+          description: expert.description,
+          image: expert.avatar,
+        }));
 
   const handleOpenModal = (agent: any) => {
     setSelectedAgent(agent);
@@ -47,7 +48,11 @@ const MainContent: React.FC = () => {
           />
         ))}
       </div>
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} agent={selectedAgent} />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        agent={selectedAgent}
+      />
     </div>
   );
 };
