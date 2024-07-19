@@ -1,12 +1,13 @@
 
+
 import Header from "./header";
 import MainContent from "./maincontent";
-import SearchFilter from "./categories";
+import SearchFilter from "./search";
 
-const Agents: React.FC = () => {
+const Tasks: React.FC = () => {
   return (
-    <div className="flex  bg-white px-6">
-      <div className="flex-1 flex flex-col">
+    <div className="flex h-screen px-10">
+      <div className="flex-1 flex flex-col ">
         <Header />
         <SearchFilter />
         <MainContent />
@@ -15,4 +16,4 @@ const Agents: React.FC = () => {
   );
 };
 
-export default Agents;
+export default Tasks;

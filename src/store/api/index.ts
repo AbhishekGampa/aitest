@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-console.log("NEXT_PUBLIC_BASE_URL: ", NEXT_PUBLIC_BASE_URL);
+const NEXT_PUBLIC_LOCAL_URL = process.env.NEXT_PUBLIC_LOCAL_URL;
+console.log("BASE_URL: ", NEXT_PUBLIC_LOCAL_URL);
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: NEXT_PUBLIC_BASE_URL,
+  baseUrl: NEXT_PUBLIC_LOCAL_URL,
   prepareHeaders: (headers) => {
     const token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjM3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjEzMTA0NjUsIm5iZiI6MTcyMTMxMDQ2NSwianRpIjoiNjQ1ZDk1OTQtM2NiYy00YmVjLTg0NGYtMGUzZjBiOWVhZDExIiwiZXhwIjoxNzIxMzk2ODY1LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ._L-cR06uMtF8AlZDDtS7tR_QAbvQXgVs3xY6pp7Vk0c";
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjM3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjEzMDgyOTcsIm5iZiI6MTcyMTMwODI5NywianRpIjoiNzA0OTQ3NmQtODc0OC00NWQ4LWEwMjYtYjI5ZTY2YjViMTU1IiwiZXhwIjoxNzIxMzk0Njk3LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.rP9SO-bTK4ZOactMai6FyjkoY7fqCTGZPDLcvFy0z2Q";
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }

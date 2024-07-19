@@ -1,18 +1,22 @@
+import userIcon from "../../Images/userIcon.svg";
+import apps from "../../Images/applications.svg";
+import tasks from "../../Images/TaskIcon.svg";
+
 export const categories = [
     {
-      icon: "👤", 
+      icon:userIcon, 
       title: "Agents",
       description: "Creating and managing experts",
       route: "/agents", 
     },
     {
-      icon: "🧩", 
+      icon: apps, 
       title: "Applications",
       description: "Discover apps to integrate with Tasks.",
       route: "/applications", 
     },
     {
-      icon: "📚", 
+      icon:tasks, 
       title: "Documentation & Knowledge Base",
       description: "Stay updated with the latest digital content.",
       route: "/docs", 
@@ -165,8 +169,69 @@ export const categories = [
         image: "appfour",
       },
     ];
+
+    export const taskData = [
+      {
+        title: "Risk Mitigation Strategy Development",
+        description: "Develop comprehensive risk mitigation strategies by analysing historical incidents and industry standards, prioritizing actions to minimize impact.",
+      },
+      {
+        title: "Risk Assessment Report Generation",
+        description:
+          "Develop comprehensive risk mitigation strategies by analysing historical incidents and industry standards, prioritizing actions to minimize impact.",
+      },
+      {
+        title: "Risk Trend Analysis & Prediction",
+        description: "Develop comprehensive risk mitigation strategies by analysing historical incidents and industry standards, prioritizing actions to minimize impact.",
+      },
+      {
+        title: "Threat Intelligence Correlation",
+        description: "Develop comprehensive risk mitigation strategies by analysing historical incidents and industry standards, prioritizing actions to minimize impact.",
+      },
+      {
+        title: "Threat Intelligence Synthesis",
+        description: "Develop comprehensive risk mitigation strategies by analysing historical incidents and industry standards, prioritizing actions to minimize impact.",
+      },
+      {
+        title: "Shift Handover Details",
+        description: "Develop comprehensive risk mitigation strategies by analysing historical incidents and industry standards, prioritizing actions to minimize impact.",
+      },
+      
+    ];
+
+    export const settingsModal = [
+      {
+        icon:userIcon, 
+        title: "System Controls",
+        description: "Creating and managing experts",
+        route: "/systemcontrols", 
+      },
+      {
+        icon: apps, 
+        title: "User Management",
+        description: "Discover apps to integrate with Tasks.",
+        route: "/usermanagement", 
+      },
+      {
+        icon:tasks, 
+        title: "Workspace Settings",
+        description: "Stay updated with the latest digital content.",
+        route: "/workspacesettings", 
+      },
+    ];
+    
   
-  
+
+export interface ConfigDetails {
+  enable_internet: boolean;
+  enable_cyber_news: boolean;
+  enable_fetch_content: boolean;
+  private_open_ai_key: string;
+  private_secret_key: string;
+  mode: string;
+  private_base_url?: string;
+}
+
     
 
   

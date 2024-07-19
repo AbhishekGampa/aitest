@@ -1,19 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import closeButton from "../../Images/closeButton.svg";
-import { categories } from "./mockdata";
+import { settingsModal } from "../(explore)/mockdata";
 
-function ExploreModal({
-  setShowModalexplore,
-  onModalChangeexplore,
+
+function SettingsModal({
+  setShowModalsettings,
+  onModalChangesettings,
 }: {
-  setShowModalexplore: (show: boolean) => void;
-  onModalChangeexplore: (changed: boolean) => void;
+  setShowModalsettings: (show: boolean) => void;
+  onModalChangesettings: (changed: boolean) => void;
 }) {
   const handleClick = (event: any) => {
     event.stopPropagation();
-    setShowModalexplore(false);
-    onModalChangeexplore(false);
+    setShowModalsettings(false);
+    onModalChangesettings(false);
   };
 
   return (
@@ -41,7 +42,7 @@ function ExploreModal({
               Select category
             </h5>
           </div>
-          {categories.map((category, index) => (
+          {settingsModal.map((category, index) => (
             <Link key={index} href={category.route} legacyBehavior>
               <a
                 className="flex items-center gap-3 py-2 w-full rounded-lg cursor-pointer hover:bg-gray-100"
@@ -67,4 +68,4 @@ function ExploreModal({
   );
 }
 
-export default ExploreModal;
+export default SettingsModal;

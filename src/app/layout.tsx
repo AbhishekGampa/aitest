@@ -23,6 +23,8 @@ export default function RootLayout({
 }>) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const [showsettingsmodal, setShowsettingsmodal] = useState(false);
+  console.log(showsettingsmodal);
   const [showModalexplore, setShowModalexplore] = useState(false);
   const [showMenu, setShowMenu] = useState(true);
   const [showDropDown, setShowDropDown] = useState(false);
@@ -39,13 +41,17 @@ export default function RootLayout({
         setShowModal((prev) => !prev);
         break;
       case "Tasks":
+        router.push("/tasks");
         setShowModal(false);
+        break;
       case "Explore":
         setShowModalexplore((prev) => !prev);
       case "FileVault":
         setShowModal(false);
-      case "Setting":
-        setShowModal(false);
+        break;
+      case "Settings":
+        setShowsettingsmodal((prev) => !prev);
+        break;
       default:
         break;
     }
@@ -65,6 +71,9 @@ export default function RootLayout({
   };
   const handleModalexploreChange = (isOpen: boolean) => {
     setShowModalexplore(isOpen);
+  };
+  const handleModalsettingsChange = (isOpen: boolean) => {
+    setShowsettingsmodal(isOpen);
   };
 
   return (

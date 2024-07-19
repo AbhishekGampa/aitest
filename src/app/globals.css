@@ -77,3 +77,6 @@
 *::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }
+.internet-switch .shadcn-switch-thumb {
+  background-color: green !important;
+}
