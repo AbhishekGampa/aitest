@@ -4,8 +4,8 @@ type UserChatItemProps = {
 }
 const UserChatItem = ({text}: UserChatItemProps) => {
   return (
-    <div>
-      
+    <div className='p-2 border'>
+      <p>{text}</p>
     </div>
   )
 }

@@ -67,7 +67,7 @@ export default function RootLayout({
     }
   };
 
-  const handleClickEvent = (event: any) => {
+  const handleClickArrow = (event: any) => {
     event.stopPropagation();
     setShowDropDown(!showDropDown);
   };
@@ -87,7 +87,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-white h-screen w-screen">
         <Provider store={store}>
-          <div className="h-full w-full flex flex-row overflow-hidden">
+          <div className="h-full w-full flex flex-row">
             <SideNavBar
               showMenu={showMenu}
               handleNavbarClick={handleNavbarClick}
@@ -108,7 +108,7 @@ export default function RootLayout({
             </div>
             <div className="flex flex-col w-full">
               <AppHeader
-                handleClickEvent={handleClickEvent}
+                handleClickArrow={handleClickArrow}
                 handleClickFolder={handleClickFolder}
                 setShowDropDown={setShowDropDown}
                 showDropDown={showDropDown}

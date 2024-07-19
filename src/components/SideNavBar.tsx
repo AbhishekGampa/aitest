@@ -13,13 +13,17 @@ type SideNavBarProps = {
 const SideNavBar = ({ showMenu, handleNavbarClick }: SideNavBarProps) => {
   return (
     <div
-      className="flex flex-col p-5 gap-5"
-      style={{ backgroundColor: "#F9F9FA", width: showMenu ? "24vw" : "5vw" }}
+      className={`flex flex-col p-5 gap-5   ${
+        showMenu ? "w-26vw" : "w-3vw"
+      } max-md:w-[10vw]`}
+      style={{ backgroundColor: "#F9F9FA" }}
     >
-      <div className=" flex flex-row gap-3">
+      <div className=" flex flex-row gap-3 w-max max-md:w-[10vw]">
         <Image src={logo} alt="logo" />
-        {showMenu ? <Image src={vectorline} alt="vector" width={3} /> : null}
-        {showMenu ? <Image src={companylogo} alt="companylogo" /> : null}
+        <div className="hidden lg:flex gap-3 w-max">
+          {showMenu ? <Image src={vectorline} alt="vector" width={3} /> : null}
+          {showMenu ? <Image src={companylogo} alt="companylogo" /> : null}
+        </div>
       </div>
       {navLinks.map((nav: any) => (
         <div
@@ -28,7 +32,9 @@ const SideNavBar = ({ showMenu, handleNavbarClick }: SideNavBarProps) => {
           onClick={(e) => handleNavbarClick(e, nav.text)}
         >
           <Image src={nav.icon} alt={nav.alt} />
-          {showMenu ? <h5>{nav.text}</h5> : null}
+          <div className="md:w-1/4 hidden md:flex">
+            {showMenu ? <h5>{nav.text}</h5> : null}
+          </div>
         </div>
       ))}
     </div>

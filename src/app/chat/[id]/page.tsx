@@ -12,7 +12,7 @@ function Chats(req: any) {
   return (
     <div className="h-full flex flex-col">
       <ChatTop {...expertData} />
-      <ChatList data={expertData} />
+      <ChatList chatData={chatData} expertData={expertData} />
     </div>
   );
 }

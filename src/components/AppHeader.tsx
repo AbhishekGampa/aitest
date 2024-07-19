@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import FolderIcon from "../Images/FolderIcon.svg";
 import UserIcon from "../Images/userIcon.svg";
 import ArrowDownIcon from "../Images/ArrowDownIcon.svg";
@@ -9,16 +9,17 @@ import ChatDropDown from "@/app/chat/chatdropdown";
 import userImage from "../Images/userInfoIcon.svg";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "@/features/ui/slice";
+import SearchModal from "./SearchModal";
 
 type AppHeaderProps = {
   handleClickFolder: () => void;
-  handleClickEvent: (event: any) => void;
+  handleClickArrow: (event: any) => void;
   setShowDropDown: (value: boolean) => void;
   showDropDown: boolean;
 };
 const AppHeader = ({
   handleClickFolder,
-  handleClickEvent,
+  handleClickArrow,
   setShowDropDown,
   showDropDown,
 }: AppHeaderProps) => {
@@ -27,8 +28,13 @@ const AppHeader = ({
     handleClickFolder();
     dispatch(toggleMenu());
   };
+  const [showSearch, setShowSearch] = useState<boolean>(false);
+
+  const handleClickSearch = () => {
+    setShowSearch(!showSearch);
+  };
   return (
-    <div className="px-10 py-5 ">
+    <div className="px-10 py-5 max-md:px-10 ">
       <div className="flex flex-row gap-5 justify-between">
         <Image
           src={FolderIcon}
@@ -38,7 +44,7 @@ const AppHeader = ({
         />
         <div className="flex flex-row gap-2 items-center relative">
           <Image src={UserIcon} alt="UserIcon" width={20} height={20} />
-          <div>
+          <div className="max-md:text-[9px]">
             <h5>AI expert</h5>
             {showDropDown ? (
               <ChatDropDown setShowDropDown={setShowDropDown} />
@@ -48,15 +54,25 @@ const AppHeader = ({
             src={ArrowDownIcon}
             alt="ArrowDownIcon"
             style={{ cursor: "pointer" }}
-            onClick={(event) => handleClickEvent(event)}
+            onClick={(event) => handleClickArrow(event)}
             width={10}
             height={10}
           />
         </div>
-        <div className="flex flex-row gap-6">
-          <Image src={SearchIcon} alt="SearchIcon" />
-          <Image src={BellIcon} alt="BellIcon" />
-          <Image src={userImage} alt="UserImage" className="rounded-full" />
+        <div className="flex flex-row gap-6 ">
+          <Image
+            src={SearchIcon}
+            alt="SearchIcon"
+            className="max-md:w-5 cursor-pointer"
+            onClick={handleClickSearch}
+          />
+          {showSearch ? <SearchModal setShowSearch={setShowSearch} /> : null}
+          <Image src={BellIcon} alt="BellIcon" className="max-md:w-5" />
+          <Image
+            src={userImage}
+            alt="UserImage"
+            className="rounded-full max-md:w-5"
+          />
         </div>
       </div>
     </div>

@@ -160,7 +160,12 @@ const DashboardPage = () => {
       </div>
       <div className="h-[60%]">
         {filteredData?.[0]?.metadata[0].stats ? (
-          <Line data={chartData} options={chartOptions} />
+          <Line
+            data={chartData}
+            options={chartOptions}
+            width={400}
+            height={200}
+          />
         ) : null}
       </div>
     </div>

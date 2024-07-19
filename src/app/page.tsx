@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 
 function Home() {
   const { data, error, isLoading } = useGetDashboardDataQuery({});
- 
 
   React.useEffect(() => {
     if (error?.data?.detail || error?.detail) {
@@ -28,14 +27,14 @@ function Home() {
       {isLoading && <LoadingModal />}
       <ToastContainer />
       <div className="px-10 w-full overflow-hidden">
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <div
-            className="text-2xl font-normal font-display "
+            className="text-2xl font-normal font-display max-md:text-sm "
             style={{ color: "#455166" }}
           >
             <h1>Hello, John</h1>
           </div>
-          <div className="text-2xl font-medium font-display">
+          <div className="text-2xl font-medium font-display max-md:text-lg ">
             How can I help you today?
           </div>
         </div>

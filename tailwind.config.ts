@@ -64,6 +64,7 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
         xs: "12px",
+        "radius-100": "var(--radius-100, 1000px)",
       },
       keyframes: {
         "accordion-down": {
@@ -81,6 +82,10 @@ const config = {
       },
       borderColor: {
         stroke: "#E0E4EA", // Custom border color
+        "button-secondary-stroke": "var(--button-secondary-stroke, #758399)",
+      },
+      borderWidth: {
+        "1": "2px",
       },
     },
   },
