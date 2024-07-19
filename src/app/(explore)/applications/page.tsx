@@ -1,7 +1,7 @@
 "use client";
 import Header from "../../../components/explore/applications/header";
 import MainContent from "../../../components/explore/applications/maincontent";
-import SearchFilter from "./categories";
+import SearchFilter from "@/components/tasks/search";
 
 const Applications: React.FC = () => {
   return (
