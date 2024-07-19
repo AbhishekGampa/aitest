@@ -43,13 +43,7 @@ interface SavedTimeProps {
   data: Data;
 }
 
-const SavedTime: React.FC<SavedTimeProps> = ({ data }) => {
-  const [savedTimeData, setSavedTimeData] = useState<Data>(data);
-
-  useEffect(() => {
-    setSavedTimeData(data);
-  }, [data]);
-
+const SaveAutomation: React.FC<SavedTimeProps> = ({ data }) => {
   const formatKey = (key: string) => {
     return key
       .split("_")
@@ -57,7 +51,7 @@ const SavedTime: React.FC<SavedTimeProps> = ({ data }) => {
       .join(" ");
   };
 
-  const statsData = savedTimeData?.metadata[0]?.stats;
+  const statsData = data?.metadata[0]?.stats;
 
   const chartData = {
     labels: statsData ? Object.keys(statsData) : [],
@@ -107,7 +101,7 @@ const SavedTime: React.FC<SavedTimeProps> = ({ data }) => {
   };
 
   return (
-    <div className="flex flex-col gap-3 h-[450px] 2xl:h-[55vh] w-max overflow-scroll items-start justify-between p-4 shrink-0 rounded-3xl bg-gray-100 hide-scrollbar">
+    <div className="flex flex-col gap-3 w-[340px] overflow-hidden items-start justify-between p-4 shrink-0 rounded-3xl bg-gray-100 hide-scrollbar">
       <div className="flex flex-row items-center justify-between w-full">
         <div
           className="flex flex-row gap-2 items-center border p-2 rounded-2xl"
@@ -117,7 +111,7 @@ const SavedTime: React.FC<SavedTimeProps> = ({ data }) => {
           <h6 className="text-sm">Dashboard</h6>
         </div>
         <div>
-          <Link href={"/dashboard?params=saved_time"}>
+          <Link href={"/dashboard?params=saved_automation"}>
             <Image
               src={arrowUpRight}
               alt="arrowUpRight"
@@ -129,7 +123,7 @@ const SavedTime: React.FC<SavedTimeProps> = ({ data }) => {
         </div>
       </div>
       <div className="text-[#455166] text-lg font-[Inter] font-normal leading-[120%] -tracking-[0.8px]">
-        <h1>Team saved time</h1>
+        <h1>Time saved with automation</h1>
         <h6 className="text-black font-bold">
           {data?.metadata[0]?.task_run && !isNaN(data?.metadata[0].task_run)
             ? `${Math.floor(data?.metadata[0].task_run / 60)}h ${
@@ -166,4 +160,4 @@ const SavedTime: React.FC<SavedTimeProps> = ({ data }) => {
   );
 };
 
-export default SavedTime;
+export default SaveAutomation;

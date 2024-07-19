@@ -1,12 +1,13 @@
 "use client";
-import { useGetChatIdQuery, useGetExpertByIdQuery } from "@/rtkquery/chatapis";
+import { useGetChatIdQuery, useGetExpertByIdQuery } from "@/store/api/chat";
 import React from "react";
-import ChatTop from "../chattop";
-import ChatList from "../chatlist";
+import ChatTop from "../../../components/chat/chattop";
+import ChatList from "../../../components/chat/chatlist";
 
 function Chats(req: any) {
   const expertId = req.params.id;
   const { data: expertData } = useGetExpertByIdQuery(expertId);
+  console.log('expertData: ', expertData);
   const { data: chatData } = useGetChatIdQuery(expertId);
   console.log("chatData: ", chatData);
   return (

@@ -10,10 +10,10 @@ function Experts({ data, key }: { data: any; key: any }) {
   useEffect(() => {
     setExpertData(data.metadata);
   }, [data]);
-  const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+  const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   return (
     <>
-      <div className="flex flex-col gap-3 h-[450px] 2xl:h-[55vh] w-[340px] overflow-scroll items-start justify-between p-4 shrink-0 rounded-[var(--Radius-Radius---M,24px)] bg-gray-100 hide-scrollbar">
+      <div className="flex flex-col gap-3 w-[340px] overflow-hidden items-start justify-between p-4 shrink-0 rounded-[var(--Radius-Radius---M,24px)] bg-gray-100 hide-scrollbar">
         <div className="flex flex-row items-center justify-between w-full">
           <div
             className="flex flex-row gap-2 items-center border p-2 rounded-2xl"
@@ -42,7 +42,7 @@ function Experts({ data, key }: { data: any; key: any }) {
           {expertData?.map((item: any) => (
             <div key={item.id} className="flex flex-row gap-4 p-3 hover:backdrop-blur-md hover:bg-gray-200 rounded-lg w-full group">
               <Image
-                src={`${base_url + item.avatar}`}
+                src={`${NEXT_PUBLIC_BASE_URL + item.avatar}`}
                 alt={item.expert_name}
                 width={20}
                 height={20}

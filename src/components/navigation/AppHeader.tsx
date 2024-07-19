@@ -1,14 +1,14 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import FolderIcon from "../Images/FolderIcon.svg";
-import UserIcon from "../Images/userIcon.svg";
-import ArrowDownIcon from "../Images/ArrowDownIcon.svg";
-import SearchIcon from "../Images/SearchIcon.svg";
-import BellIcon from "../Images/NotificationIcon.svg";
-import ChatDropDown from "@/app/chat/chatdropdown";
-import userImage from "../Images/userInfoIcon.svg";
+import FolderIcon from "@/Images/FolderIcon.svg";   
+import UserIcon from "@/Images/userIcon.svg";
+import ArrowDownIcon from "@/Images/ArrowDownIcon.svg";
+import SearchIcon from "@/Images/SearchIcon.svg";
+import BellIcon from "@/Images/NotificationIcon.svg";
+import ChatDropDown from "@/components/chat/chatdropdown";
+import userImage from "@/Images/userInfoIcon.svg";
 import { useDispatch } from "react-redux";
-import { toggleMenu } from "@/features/ui/slice";
+import { toggleMenu } from "@/store/menu";
 import SearchModal from "./SearchModal";
 
 type AppHeaderProps = {

@@ -4,15 +4,15 @@ import "./globals.css";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Provider } from "react-redux";
-import { store } from "@/store/store";
-import ChatModal from "./chat/chatmodal";
+import { store } from "@/store";
+import ChatModal from "../components/chat/chatmodal";
 import ExploreModal from "./(explore)/exploremodal";
 import { useRouter } from "next/navigation";
 import { navLinks } from "@/utils/constants";
-import ChatDropDown from "./chat/chatdropdown";
-import SideNavBar from "@/components/SideNavBar";
-import AppHeader from "@/components/AppHeader";
-import PageWrapper from "@/components/PageWrapper";
+import ChatDropDown from "../components/chat/chatdropdown";
+import SideNavBar from "@/components/navigation/SideNavBar";
+import AppHeader from "@/components/navigation/AppHeader";
+import PageWrapper from "@/components/navigation/PageWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -72,25 +72,27 @@ export default function RootLayout({
       <body className="bg-white h-screen w-screen hide-scrollbar">
         <Provider store={store}>
           <div className="h-full w-full flex flex-row">
-            <SideNavBar
-              showMenu={showMenu}
-              handleNavbarClick={handleNavbarClick}
-            />
-            <div className="relative">
-              {showModal ? (
-                <ChatModal
-                  setShowModal={setShowModal}
-                  onModalChange={handleModalChange}
-                />
-              ) : null}
-              {showModalexplore ? (
-                <ExploreModal
-                  setShowModalexplore={setShowModalexplore}
-                  onModalChangeexplore={handleModalexploreChange}
-                />
-              ) : null}
+            <div className="h-full">
+              <SideNavBar
+                showMenu={showMenu}
+                handleNavbarClick={handleNavbarClick}
+              />
+              <div className="relative">
+                {showModal ? (
+                  <ChatModal
+                    setShowModal={setShowModal}
+                    onModalChange={handleModalChange}
+                  />
+                ) : null}
+                {showModalexplore ? (
+                  <ExploreModal
+                    setShowModalexplore={setShowModalexplore}
+                    onModalChangeexplore={handleModalexploreChange}
+                  />
+                ) : null}
+              </div>
             </div>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col flex-1 overflow-x-hidden">
               <AppHeader
                 handleClickArrow={handleClickArrow}
                 handleClickFolder={handleClickFolder}

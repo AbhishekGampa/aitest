@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-console.log("BASE_URL: ", NEXT_PUBLIC_BASE_URL);
+console.log("NEXT_PUBLIC_BASE_URL: ", NEXT_PUBLIC_BASE_URL);
 
 const baseQuery = fetchBaseQuery({
   baseUrl: NEXT_PUBLIC_BASE_URL,
@@ -17,7 +17,7 @@ const baseQuery = fetchBaseQuery({
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  tagTypes: ["chats"],
+  tagTypes: ["chatexperts","chatexpertbyid","chatid"],
   baseQuery,
   endpoints: () => ({}),
 });

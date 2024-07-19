@@ -1,4 +1,4 @@
-import { useGetExpertsQuery } from "@/rtkquery/chatapis"
+import { useGetExpertsQuery } from "@/store/api/chat"
 import Image from "next/image"
 import Link from "next/link"
 

@@ -1,7 +1,7 @@
 import { navLinks } from "@/utils/constants";
-import logo from "../Images/logo.svg";
-import vectorline from "../Images/Vector.svg";
-import companylogo from "../Images/companylogo.svg";
+import logo from "@/Images/logo.svg";
+import vectorline from "@/Images/Vector.svg";
+import companylogo from "@/Images/companylogo.svg";
 import Image from "next/image";
 import React from "react";
 
@@ -13,8 +13,8 @@ type SideNavBarProps = {
 const SideNavBar = ({ showMenu, handleNavbarClick }: SideNavBarProps) => {
   return (
     <div
-      className={`flex flex-col p-5 gap-5   ${
-        showMenu ? "w-26vw" : "w-3vw"
+      className={`flex flex-col p-5 gap-5 h-full transition-all duration-150  ${
+        showMenu ? "w-[190px] " : "w-[75px]"
       } max-md:w-[10vw]`}
       style={{ backgroundColor: "#F9F9FA" }}
     >

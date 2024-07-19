@@ -8,10 +8,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "./ui/input";
+import { Input } from "@/components/ui/input";
 import SearchIcon from "@/Images/SearchIcon.svg";
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import ArrowDown from "@/Images/ArrowDownIcon.svg";
 
 const SearchModal = ({

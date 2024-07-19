@@ -1,13 +1,14 @@
 "use client";
-import { useGetExpertsQuery } from "@/rtkquery/chatapis";
-import { useGetDashboardDataQuery } from "@/rtkquery/homeapis";
+import { useGetExpertsQuery } from "@/store/api/chat";
+import { useGetDashboardDataQuery } from "@/store/api/home";
 import React, { useEffect, useRef, useState } from "react";
-import Experts from "./home/experts";
-import SavedTime from "./home/savedtime";
-import SaveAutomation from "./home/saveautomation";
+import Experts from "../components/pages/home/experts";
+import SavedTime from "../components/pages/home/savedtime";
+import SaveAutomation from "../components/pages/home/saveautomation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingModal from "../components/ui/loading";
+
 
 const ScrollableCardsContainer = ({ data }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -15,32 +16,52 @@ const ScrollableCardsContainer = ({ data }) => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - (scrollContainerRef.current?.offsetLeft ?? 0);
+      const walk = (x - startX) * 3; // Adjust scroll speed here
+      scrollContainerRef.current!.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleMouseUpOrLeave = () => {
+      setIsDragging(false);
+    };
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUpOrLeave);
+      document.addEventListener('mouseleave', handleMouseUpOrLeave);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUpOrLeave);
+      document.removeEventListener('mouseleave', handleMouseUpOrLeave);
+    };
+  }, [isDragging, startX, scrollLeft]);
+
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setIsDragging(true);
     setStartX(e.pageX - (scrollContainerRef.current?.offsetLeft ?? 0));
     setScrollLeft(scrollContainerRef.current?.scrollLeft ?? 0);
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - (scrollContainerRef.current?.offsetLeft ?? 0);
-    const walk = (x - startX) * 3; // The number 3 determines the scroll speed
-    scrollContainerRef.current!.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleMouseUpOrLeave = () => {
-    setIsDragging(false);
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (!scrollContainerRef.current) return;
+    const { deltaY } = e;
+    const newScrollLeft = scrollContainerRef.current.scrollLeft + deltaY;
+    scrollContainerRef.current.scrollLeft = newScrollLeft;
+    e.preventDefault(); // Prevent the page from scrolling vertically
   };
 
   return (
     <div
-      className="mt-5 flex flex-row gap-4 overflow-scroll hide-scrollbar w-full"
+      className="mt-5 flex flex-row gap-4 overflow-scroll hide-scrollbar w-full h-[490px] overflow-y-hidden"
       ref={scrollContainerRef}
       onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUpOrLeave}
-      onMouseLeave={handleMouseUpOrLeave}
+      onWheel={handleWheel}
     >
       {data?.map((item, index) => {
         switch (item.card_type) {
@@ -58,7 +79,6 @@ const ScrollableCardsContainer = ({ data }) => {
   );
 };
 
-
 function Home() {
   const { data, error, isLoading } = useGetDashboardDataQuery({});
 
@@ -75,8 +95,8 @@ function Home() {
     <>
       {isLoading && <LoadingModal />}
       <ToastContainer />
-      <div className="px-10 w-full overflow-hidden">
-        <div className="flex flex-col ">
+      <div className="px-10 w-full h-80vh">
+        <div className="flex flex-col">
           <div
             className="text-2xl font-normal font-display max-md:text-sm "
             style={{ color: "#455166" }}

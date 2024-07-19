@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { apiSlice } from "../rtkquery/index";
-import { homeapis } from "../rtkquery/homeapis";
-import menuSlice from "@/features/ui/slice";
+import { apiSlice } from "./api/index";
+import { homeapis } from "./api/home";
+import menuSlice from "@/store/menu";
 
 export const store = configureStore({
   reducer: {
@@ -11,8 +11,7 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(apiSlice.middleware)
-      .concat(homeapis.middleware),
+      .concat([apiSlice.middleware, homeapis.middleware])
 });
 
 export type RootState = ReturnType<typeof store.getState>;

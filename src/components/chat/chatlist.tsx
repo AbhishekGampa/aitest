@@ -5,7 +5,7 @@ import Image from "next/image";
 import vectorIcon from "@/Images/Vector.svg";
 import { useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { usePromptChatMutation } from "@/rtkquery/LLMapis";
+import { usePromptChatMutation } from "@/store/api/LLM";
 
 function ChatList({
   chatData,
@@ -65,7 +65,7 @@ function ChatList({
       </div>
       <div className="flex-grow overflow-auto hide-scrollbar">
         {messages.map((message: any) => (
-          <div>
+          <div key={message}>
             <p>{message.text}</p>
           </div>
         ))}

@@ -1,5 +1,5 @@
 "use client";
-import { useGetDashboardDataQuery } from "@/rtkquery/homeapis";
+import { useGetDashboardDataQuery } from "@/store/api/home";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
@@ -158,12 +158,12 @@ const DashboardPage = () => {
           </div>
         ))}
       </div>
-      <div className="w-84vw">
+      <div >
         {filteredData?.[0]?.metadata[0].stats ? (
           <Line
             data={chartData}
             options={chartOptions}
-            style={{ width: "80vw" }}
+            width={350}
           />
         ) : null}
       </div>
