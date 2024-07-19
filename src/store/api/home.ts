@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
     const token =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjM3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjEzOTczODksIm5iZiI6MTcyMTM5NzM4OSwianRpIjoiNjMzNjM4MDAtMGE3My00NGFiLTgyMDEtOTRiMDZjMWEyMzczIiwiZXhwIjoxNzIxNDgzNzg5LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.OOgDJSMGvHVzoWwG5jT0p4k7KpJOhTs7G7BrKbcaNzM";
     headers.set("Authorization", `Bearer ${token}`);
-    headers.set("Content-Type", "application/json");
+    headers.set("ngrok-skip-browser-warning", "true");
     return headers;
   },
 });

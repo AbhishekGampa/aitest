@@ -28,7 +28,7 @@ const SideNavBar = ({ showMenu, handleNavbarClick }: SideNavBarProps) => {
       {navLinks.map((nav: any) => (
         <div
           key={nav.text}
-          className="flex flex-row gap-3 cursor-pointer"
+          className="flex flex-row gap-3 cursor-pointer hover:bg-gray-200 rounded-lg p-2"
           onClick={(e) => handleNavbarClick(e, nav.text)}
         >
           <Image src={nav.icon} alt={nav.alt} />

@@ -76,23 +76,25 @@ const ChatModal = forwardRef<HTMLDivElement, ChatModalProps>(
                   key={item.id}
                   className="flex justify-between items-center"
                 >
-                  <div
-                    className="flex flex-row w-[300px] py-1 items-center gap-2 self-stretch hover:backdrop-blur-md hover:bg-gray-200 rounded-lg "
-                    style={{ padding: "12px" }}
-                  >
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_BASE_URL + item.avatar}`}
-                      alt={`${item.expert_name}`}
-                      className="rounded-full"
-                      width={30}
-                      height={30}
-                    />
-                    <Link href={`/chat/${item.id}`}>
+                  <Link href={`/chat/${item.id}`}>
+                    <div
+                      className="flex flex-row w-[300px] py-1 items-center gap-2 self-stretch hover:backdrop-blur-md hover:bg-gray-200 rounded-lg "
+                      style={{ padding: "12px" }}
+                    >
+                      <Image
+                        src={`${
+                          process.env.NEXT_PUBLIC_BASE_URL + item.avatar
+                        }`}
+                        alt={`${item.expert_name}`}
+                        className="rounded-full"
+                        width={30}
+                        height={30}
+                      />
                       <h5 onClick={(event) => handleClick(event)}>
                         {item.expert_name}
                       </h5>
-                    </Link>
-                  </div>
+                    </div>
+                  </Link>
                   <div className=" text-text-secondary overflow-hidden text-right truncate font-custom text-sm font-normal leading-tight tracking-tight-custom text-custom-secondary">
                     {item.time}
                   </div>
