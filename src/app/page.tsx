@@ -1,14 +1,63 @@
 "use client";
 import { useGetExpertsQuery } from "@/rtkquery/chatapis";
 import { useGetDashboardDataQuery } from "@/rtkquery/homeapis";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Experts from "./home/experts";
 import SavedTime from "./home/savedtime";
 import SaveAutomation from "./home/saveautomation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingModal from "../components/ui/loading";
-import { useSelector } from "react-redux";
+
+const ScrollableCardsContainer = ({ data }) => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setIsDragging(true);
+    setStartX(e.pageX - (scrollContainerRef.current?.offsetLeft ?? 0));
+    setScrollLeft(scrollContainerRef.current?.scrollLeft ?? 0);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - (scrollContainerRef.current?.offsetLeft ?? 0);
+    const walk = (x - startX) * 3; // The number 3 determines the scroll speed
+    scrollContainerRef.current!.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    setIsDragging(false);
+  };
+
+  return (
+    <div
+      className="mt-5 flex flex-row gap-4 overflow-scroll hide-scrollbar w-full"
+      ref={scrollContainerRef}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUpOrLeave}
+      onMouseLeave={handleMouseUpOrLeave}
+    >
+      {data?.map((item, index) => {
+        switch (item.card_type) {
+          case "expert":
+            return <Experts key={index} data={item} />;
+          case "saved_time":
+            return <SavedTime key={index} data={item} />;
+          case "saved_automation":
+            return <SaveAutomation key={index} data={item} />;
+          default:
+            return null;
+        }
+      })}
+    </div>
+  );
+};
+
 
 function Home() {
   const { data, error, isLoading } = useGetDashboardDataQuery({});
@@ -38,24 +87,7 @@ function Home() {
             How can I help you today?
           </div>
         </div>
-        <div className="mt-5 flex flex-row gap-4 overflow-scroll hide-scrollbar w-full">
-          <>
-            {/* {Array(10).fill('').map(()=><div className="w-[200px] h-[300px] m-2 bg-blue-400 flex-shrink-0"></div>)} */}
-            {data?.map((item: any, index: any) =>
-              item.card_type === "expert" ? (
-                <Experts key={index} data={item} />
-              ) : null
-            )}
-            {data?.map((item: any, index: any) =>
-              item.card_type === "saved_time" ? <SavedTime data={item} /> : null
-            )}
-            {data?.map((item: any, index: any) =>
-              item.card_type === "saved_automation" ? (
-                <SaveAutomation data={item} />
-              ) : null
-            )}
-          </>
-        </div>
+        <ScrollableCardsContainer data={data} />
       </div>
     </>
   );

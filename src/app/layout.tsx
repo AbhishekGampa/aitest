@@ -3,22 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import logo from "../Images/logo.svg";
-import vectorline from "../Images/Vector.svg";
-import companylogo from "../Images/companylogo.svg";
-import HomeIcon from "../Images/HomeIcon.svg";
-import chatIcon from "../Images/chatIcon.svg";
-import TaskIcon from "../Images/TaskIcon.svg";
-import ExploreIcon from "../Images/ExploreIcon.svg";
-import FileIcon from "../Images/FileIcon.svg";
-import settingIcon from "../Images/settingIcon.svg";
-import Image from "next/image";
-import FolderIcon from "../Images/FolderIcon.svg";
-import UserIcon from "../Images/userIcon.svg";
-import ArrowDownIcon from "../Images/ArrowDownIcon.svg";
-import SearchIcon from "../Images/SearchIcon.svg";
-import BellIcon from "../Images/NotificationIcon.svg";
-import userImage from "../Images/userInfoIcon.svg";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
 import ChatModal from "./chat/chatmodal";
@@ -85,7 +69,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-white h-screen w-screen">
+      <body className="bg-white h-screen w-screen hide-scrollbar">
         <Provider store={store}>
           <div className="h-full w-full flex flex-row">
             <SideNavBar

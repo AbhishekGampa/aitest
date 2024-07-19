@@ -23,13 +23,15 @@ function Experts({ data, key }: { data: any; key: any }) {
             <h6 className="text-sm">AI Experts</h6>
           </div>
           <div>
+            <Link href={`chat/${data.metadata[0].id}`}>
             <Image
               src={arrowUpRight}
               alt="arrowUpRight"
               width={20}
               height={20}
               className="cursor-pointer"
-            />
+              />
+              </Link>
           </div>
         </div>
         <div className="text-[#455166] text-lg font-[Inter]  font-normal leading-[120%] -tracking-[0.8px]">
