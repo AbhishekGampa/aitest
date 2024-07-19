@@ -17,10 +17,10 @@ type ChatModalProps = {
   onModalChange: (isOpen: boolean) => void;
 };
 
-
 const ChatModal = forwardRef<HTMLDivElement, ChatModalProps>(
   ({ setShowModal, onModalChange }) => {
     const { data, isLoading, error } = useGetExpertsQuery({});
+    console.log("data: ", data);
     const handleClick = (event: any) => {
       event.stopPropagation();
       setShowModal(false);
@@ -40,7 +40,7 @@ const ChatModal = forwardRef<HTMLDivElement, ChatModalProps>(
         {isLoading && <LoadingModal />}
         <ToastContainer />
         <div
-          className="absolute top-1 left-0 right-0 mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] h-screen overflow-scroll hide-scrollbar"
+          className="fixed top-1  mt-1 bg-white shadow-md rounded-lg p-5 z-10 w-[350px] h-screen overflow-scroll hide-scrollbar"
           style={{ height: "calc(100vh - 1.2rem)" }}
         >
           <div className="flex flex-col items-start gap-3 self-stretch">
@@ -100,6 +100,6 @@ const ChatModal = forwardRef<HTMLDivElement, ChatModalProps>(
   }
 );
 
-ChatModal.displayName = 'ChatModal';
+ChatModal.displayName = "ChatModal";
 
 export default ChatModal;

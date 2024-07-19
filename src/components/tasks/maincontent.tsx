@@ -1,6 +1,6 @@
 import React from "react";
 import { taskData } from "../explore/mockdata";
-import TaskCard from "../../app/tasks/taskcards";
+import TaskCard from "@/components/tasks/taskcards";
 
 const MainContent: React.FC = () => {
   return (

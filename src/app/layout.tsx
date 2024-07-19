@@ -23,6 +23,7 @@ export default function RootLayout({
 }>) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  console.log('showModal: ', showModal);
   const [showsettingsmodal, setShowsettingsmodal] = useState(false);
   console.log(showsettingsmodal);
   const [showModalexplore, setShowModalexplore] = useState(false);

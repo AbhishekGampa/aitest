@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { useGetExpertsQuery } from "@/store/api/chatapis";
+import { useGetExpertsQuery } from "@/store/api/chat";
 import { staticagents } from "../mockdata";
 import AgentCard from "./agentcards";
 import Modal from "./agentdetails";
