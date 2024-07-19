@@ -81,7 +81,7 @@ export default function RootLayout({
       <body className="bg-white h-screen w-screen hide-scrollbar">
         <Provider store={store}>
           <div className="h-full w-full flex flex-row">
-            <div className="h-full">
+            <div className="h-full flex ">
               <SideNavBar
                 showMenu={showMenu}
                 handleNavbarClick={handleNavbarClick}
