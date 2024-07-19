@@ -103,7 +103,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="px-10" >
+    <div className="px-10 " >
       <div className="flex flex-col">
         <div
           className="text-2xl font-normal font-display "
