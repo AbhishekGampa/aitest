@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, agent }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
-      <div className="bg-white p-8 rounded-xl w-[90vh] h-[80vh] relative">
+      <div className="bg-white p-8 rounded-xl  h-[80vh] relative">
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 text-2xl">&times;</button>
         <div className="flex items-center mb-2">
           <img
