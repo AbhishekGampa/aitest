@@ -22,13 +22,15 @@ const SideNavBar = ({ showMenu, handleNavbarClick }: SideNavBarProps) => {
         <Image src={logo} alt="logo" />
         <div className="hidden lg:flex gap-3 w-max">
           {showMenu ? <Image src={vectorline} alt="vector" width={3} /> : null}
-          {showMenu ? <Image src={companylogo} alt="companylogo" /> : null}
+          {showMenu ? (
+            <h1 className="font-bold text-black">CyberPod AI</h1>
+          ) : null}
         </div>
       </div>
       {navLinks.map((nav: any) => (
         <div
           key={nav.text}
-          className="flex flex-row gap-3 cursor-pointer hover:bg-gray-200 rounded-lg p-2"
+          className="flex flex-row gap-3 cursor-pointer hover:bg-gray-200 rounded-lg w-max"
           onClick={(e) => handleNavbarClick(e, nav.text)}
         >
           <Image src={nav.icon} alt={nav.alt} />

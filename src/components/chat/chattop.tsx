@@ -7,7 +7,7 @@ interface ChatTopProps {
 function ChatTop({ expert_name }: ChatTopProps) {
   console.log("expert_name: ", expert_name);
   return (
-    <div className="px-10">
+    <div className="pl-7">
       <div className="flex flex-col">
         <div
           className="text-4xl font-normal font-display max-md:text-sm "

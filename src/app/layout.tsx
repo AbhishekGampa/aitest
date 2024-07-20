@@ -50,6 +50,7 @@ export default function RootLayout({
       case "Explore":
         setShowModalexplore((prev) => !prev);
       case "FileVault":
+        router.push("/filevault");
         setShowModal(false);
         break;
       case "Settings":

@@ -51,7 +51,7 @@ function ChatList({
 
   return (
     <div className="flex-grow relative flex flex-col overflow-auto">
-      <div className="px-10 mt-7">
+      <div className="pl-7 mt-7">
         <div>
           <div className="flex flex-col">
             <div

@@ -80,3 +80,15 @@
 .internet-switch .shadcn-switch-thumb {
   background-color: green !important;
 }
+
+
+
+.ag-root-wrapper {
+  border-radius: var(--Radius-Radius---S, 16px);
+  /* background: var(--surface, #F9F9FA); */
+  border: none;
+}
+
+.ag-header-row{
+  border: none;
+}
