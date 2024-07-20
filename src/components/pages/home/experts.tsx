@@ -4,8 +4,17 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import arrowUpRight from "@/Images/arrowUpRight.svg";
 
-
-function Experts({ data, key }: { data: any; key: any }) {
+function Experts({
+  data,
+  key,
+  disableScroll,
+  enableScroll,
+}: {
+  data: any;
+  key: any;
+  disableScroll: () => void;
+  enableScroll: () => void;
+}) {
   const [expertData, setExpertData] = useState<any>();
   useEffect(() => {
     setExpertData(data.metadata);
@@ -13,7 +22,11 @@ function Experts({ data, key }: { data: any; key: any }) {
   const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   return (
     <>
-      <div className="flex flex-col gap-3 w-[340px] overflow-hidden items-start justify-between p-4 shrink-0 rounded-[var(--Radius-Radius---M,24px)] bg-gray-100 hide-scrollbar">
+      <div
+        className="flex flex-col gap-3 w-[340px] overflow-scroll items-start justify-between p-4 shrink-0 rounded-[var(--Radius-Radius---M,24px)] bg-gray-100 hide-scrollbar"
+        onMouseEnter={disableScroll}
+        onMouseLeave={enableScroll}
+      >
         <div className="flex flex-row items-center justify-between w-full">
           <div
             className="flex flex-row gap-2 items-center border p-2 rounded-2xl"
@@ -24,14 +37,14 @@ function Experts({ data, key }: { data: any; key: any }) {
           </div>
           <div>
             <Link href={`chat/${data.metadata[0].id}`}>
-            <Image
-              src={arrowUpRight}
-              alt="arrowUpRight"
-              width={20}
-              height={20}
-              className="cursor-pointer"
+              <Image
+                src={arrowUpRight}
+                alt="arrowUpRight"
+                width={20}
+                height={20}
+                className="cursor-pointer"
               />
-              </Link>
+            </Link>
           </div>
         </div>
         <div className="text-[#455166] text-lg font-[Inter]  font-normal leading-[120%] -tracking-[0.8px]">
@@ -40,7 +53,10 @@ function Experts({ data, key }: { data: any; key: any }) {
         </div>
         <div className="flex flex-col w-full">
           {expertData?.map((item: any) => (
-            <div key={item.id} className="flex flex-row gap-4 p-3 hover:backdrop-blur-md hover:bg-gray-200 rounded-lg w-full group">
+            <div
+              key={item.id}
+              className="flex flex-row gap-4 p-3 hover:backdrop-blur-md hover:bg-gray-200 rounded-lg w-full group"
+            >
               <Image
                 src={`${NEXT_PUBLIC_BASE_URL + item.avatar}`}
                 alt={item.expert_name}

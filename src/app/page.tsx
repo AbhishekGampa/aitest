@@ -9,16 +9,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingModal from "../components/ui/loading";
 
-
 const ScrollableCardsContainer = ({ data }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [scrollEnabled, setScrollEnabled] = useState(true);
+
+  const disableScroll = () => setScrollEnabled(false);
+  const enableScroll = () => setScrollEnabled(true);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
+      if (!isDragging || !scrollEnabled) return;
       e.preventDefault();
       const x = e.pageX - (scrollContainerRef.current?.offsetLeft ?? 0);
       const walk = (x - startX) * 3; // Adjust scroll speed here
@@ -29,27 +32,32 @@ const ScrollableCardsContainer = ({ data }) => {
       setIsDragging(false);
     };
 
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUpOrLeave);
-      document.addEventListener('mouseleave', handleMouseUpOrLeave);
+    if (isDragging && scrollEnabled) {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUpOrLeave);
+      document.addEventListener("mouseleave", handleMouseUpOrLeave);
+    } else {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUpOrLeave);
+      document.removeEventListener("mouseleave", handleMouseUpOrLeave);
     }
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUpOrLeave);
-      document.removeEventListener('mouseleave', handleMouseUpOrLeave);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUpOrLeave);
+      document.removeEventListener("mouseleave", handleMouseUpOrLeave);
     };
-  }, [isDragging, startX, scrollLeft]);
+  }, [isDragging, startX, scrollLeft, scrollEnabled]);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!scrollEnabled) return;
     setIsDragging(true);
     setStartX(e.pageX - (scrollContainerRef.current?.offsetLeft ?? 0));
     setScrollLeft(scrollContainerRef.current?.scrollLeft ?? 0);
   };
 
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    if (!scrollContainerRef.current) return;
+    if (!scrollEnabled || !scrollContainerRef.current) return;
     const { deltaY } = e;
     const newScrollLeft = scrollContainerRef.current.scrollLeft + deltaY;
     scrollContainerRef.current.scrollLeft = newScrollLeft;
@@ -66,7 +74,14 @@ const ScrollableCardsContainer = ({ data }) => {
       {data?.map((item, index) => {
         switch (item.card_type) {
           case "expert":
-            return <Experts key={index} data={item} />;
+            return (
+              <Experts
+                key={index}
+                data={item}
+                disableScroll={disableScroll}
+                enableScroll={enableScroll}
+              />
+            );
           case "saved_time":
             return <SavedTime key={index} data={item} />;
           case "saved_automation":
