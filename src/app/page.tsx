@@ -110,7 +110,7 @@ function Home() {
     <>
       {isLoading && <LoadingModal />}
       <ToastContainer />
-      <div className="pl-7 pr-4 w-full h-80vh">
+      <div className="pl-7 pr-4 w-full h-80vh max-md:px-2">
         <div className="flex flex-col">
           <div
             className="text-2xl font-normal font-display max-md:text-sm "

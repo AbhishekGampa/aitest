@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import FolderIcon from "@/Images/FolderIcon.svg";   
+import FolderIcon from "@/Images/FolderIcon.svg";
 import UserIcon from "@/Images/userIcon.svg";
 import ArrowDownIcon from "@/Images/ArrowDownIcon.svg";
 import SearchIcon from "@/Images/SearchIcon.svg";
@@ -23,10 +23,10 @@ const AppHeader = ({
   setShowDropDown,
   showDropDown,
 }: AppHeaderProps) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const handleClick = () => {
     handleClickFolder();
-    dispatch(toggleMenu());
+    // dispatch(toggleMenu());
   };
   const [showSearch, setShowSearch] = useState<boolean>(false);
 
@@ -34,7 +34,7 @@ const AppHeader = ({
     setShowSearch(!showSearch);
   };
   return (
-    <div className="px-10 py-5 max-md:px-10 ">
+    <div className="px-10 py-5 max-md:px-5">
       <div className="flex flex-row gap-5 justify-between">
         <Image
           src={FolderIcon}

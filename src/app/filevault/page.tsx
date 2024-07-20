@@ -12,6 +12,10 @@ import "ag-grid-community/styles/ag-grid.css"; // Ensure you have imported neces
 import "ag-grid-community/styles/ag-theme-alpine.css"; // or any other theme you're using
 import "../../app/globals.css";
 import { useGetFileVaultDataQuery } from "@/store/api/filevaul";
+import {
+  CheckboxSelectionCallbackParams,
+  HeaderCheckboxSelectionCallbackParams,
+} from "ag-grid-community";
 
 interface Headers {
   Name: string;
@@ -25,6 +29,17 @@ interface Headers {
 interface ColDef {
   field: string;
   flex?: number;
+  width?: number;
+}
+
+function isFirstColumn(
+  params:
+    | CheckboxSelectionCallbackParams
+    | HeaderCheckboxSelectionCallbackParams
+) {
+  var displayedColumns = params.api.getAllDisplayedColumns();
+  var thisIsFirstColumn = displayedColumns[0] === params.column;
+  return thisIsFirstColumn;
 }
 
 const FileVault = () => {
@@ -41,7 +56,7 @@ const FileVault = () => {
   }));
 
   const initialColDefs: ColDef[] = [
-    { field: "Name" },
+    { field: "Name", width: 500 },
     { field: "Status" },
     { field: "Created By" },
     { field: "Created At" },
@@ -59,13 +74,15 @@ const FileVault = () => {
   const defaultColDef = {
     flex: 1, // Allow columns to flex
     minWidth: 100, // Set a reasonable minWidth
+    headerCheckboxSelection: isFirstColumn,
+    checkboxSelection: isFirstColumn,
   };
 
   const rowSelection = "multiple";
 
   return (
-    <div className="h-full flex flex-col  w-full overflow-clip">
-      <div className="pl-7  pr-4 flex gap-3 flex-col">
+    <div className="h-full flex flex-col  w-full overflow-clip ">
+      <div className="pl-7  pr-4 flex gap-3 flex-col max-md:pl-2">
         <div className="flex flex-row justify-between">
           <div className="text-[var(--text-secondary,#455166)] font-[var(--Font-Family-Display-style---Web,Inter)] text-3xl max-md:text-[15px] leading-[110%] tracking-tight">
             <h1>Home for your files</h1>
@@ -106,14 +123,15 @@ const FileVault = () => {
         </div>
         <div className="h-full flex flex-col  w-full overflow-clip">
           <div
-            className="ag-theme-alpine  ag-root-wrapper"
+            className="ag-theme-alpine ag-root-wrapper"
             style={{ height: 400, width: "100%" }}
           >
             <AgGridReact
               rowData={rowData}
               columnDefs={adjustedColDefs}
-              rowSelection={rowSelection}
               defaultColDef={defaultColDef}
+              suppressRowClickSelection={true}
+              rowSelection={"multiple"}
             />
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import ApplicationCard from "./applicationcards";
-import { useGetApplicationsQuery } from "@/store/api/applicationsapis";
+import { useGetApplicationsQuery } from "@/store/api/applications";
 import { applications } from "../mockdata";
 
 const MainContent: React.FC = () => {

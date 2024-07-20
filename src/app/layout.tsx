@@ -14,6 +14,8 @@ import SideNavBar from "@/components/navigation/SideNavBar";
 import AppHeader from "@/components/navigation/AppHeader";
 import PageWrapper from "@/components/navigation/PageWrapper";
 import SettingsModal from "@/components/settings/settingsmodal";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import NoSSR from "@/components/noSSR";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,12 +26,13 @@ export default function RootLayout({
 }>) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
-  console.log("showModal: ", showModal);
   const [showsettingsmodal, setShowsettingsmodal] = useState(false);
-  console.log("showsettingsmodal: ", showsettingsmodal);
   console.log(showsettingsmodal);
   const [showModalexplore, setShowModalexplore] = useState(false);
-  const [showMenu, setShowMenu] = useState(true);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  console.log("matches: ", isMobile);
+  const [showMenu, setShowMenu] = useState(isMobile ? false : true);
+  console.log("showMenu: ", showMenu);
   const [showDropDown, setShowDropDown] = useState(false);
 
   const handleNavbarClick = (event: any, screen: string) => {
@@ -84,43 +87,45 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-white h-screen w-screen hide-scrollbar">
         <Provider store={store}>
-          <div className="h-full w-full flex flex-row">
-            <div className="h-full flex ">
-              <SideNavBar
-                showMenu={showMenu}
-                handleNavbarClick={handleNavbarClick}
-              />
-              <div className="relative">
-                {showModal ? (
-                  <ChatModal
-                    setShowModal={setShowModal}
-                    onModalChange={handleModalChange}
-                  />
-                ) : null}
-                {showModalexplore ? (
-                  <ExploreModal
-                    setShowModalexplore={setShowModalexplore}
-                    onModalChangeexplore={handleModalexploreChange}
-                  />
-                ) : null}
-                {showsettingsmodal ? (
-                  <SettingsModal
-                    setShowModalsettings={setShowsettingsmodal}
-                    onModalChangesettings={handleModalsettingsChange}
-                  />
-                ) : null}
+          <NoSSR>
+            <div className="h-full w-full flex flex-row">
+              <div className="h-full flex ">
+                <SideNavBar
+                  showMenu={showMenu}
+                  handleNavbarClick={handleNavbarClick}
+                />
+                <div className="relative">
+                  {showModal ? (
+                    <ChatModal
+                      setShowModal={setShowModal}
+                      onModalChange={handleModalChange}
+                    />
+                  ) : null}
+                  {showModalexplore ? (
+                    <ExploreModal
+                      setShowModalexplore={setShowModalexplore}
+                      onModalChangeexplore={handleModalexploreChange}
+                    />
+                  ) : null}
+                  {showsettingsmodal ? (
+                    <SettingsModal
+                      setShowModalsettings={setShowsettingsmodal}
+                      onModalChangesettings={handleModalsettingsChange}
+                    />
+                  ) : null}
+                </div>
+              </div>
+              <div className="flex flex-col flex-1 overflow-x-hidden">
+                <AppHeader
+                  handleClickArrow={handleClickArrow}
+                  handleClickFolder={handleClickFolder}
+                  setShowDropDown={setShowDropDown}
+                  showDropDown={showDropDown}
+                />
+                <PageWrapper>{children}</PageWrapper>
               </div>
             </div>
-            <div className="flex flex-col flex-1 overflow-x-hidden">
-              <AppHeader
-                handleClickArrow={handleClickArrow}
-                handleClickFolder={handleClickFolder}
-                setShowDropDown={setShowDropDown}
-                showDropDown={showDropDown}
-              />
-              <PageWrapper>{children}</PageWrapper>
-            </div>
-          </div>
+          </NoSSR>
         </Provider>
       </body>
     </html>
