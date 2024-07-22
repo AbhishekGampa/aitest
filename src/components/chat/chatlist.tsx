@@ -66,24 +66,21 @@ function ChatList({
         if (msg.endsWith(".")) {
           const fullMessage = messageParts.current.join(" ");
 
-          setMessages((prevMessages: any) => {
+          setMessages((prevMessages) => {
             const lastMessage = prevMessages[prevMessages.length - 1];
             console.log("lastMessage: ", lastMessage);
-            if (
-              lastMessage?.messages?.[lastMessage.messages.length - 1] ===
-              fullMessage
-            ) {
-              return prevMessages; 
+            if (lastMessage && lastMessage.text === fullMessage) {
+              return prevMessages;
             }
 
-            if (lastMessage?.role === "expert" && lastMessage?.messages) {
-              lastMessage.messages.push(fullMessage);
-              return [...prevMessages];
-            } else {
+            if (lastMessage && lastMessage.role === "expert") {
+              // Assuming messages is an array of objects, this part might need adjustment based on actual data structure
               return [
-                ...prevMessages,
-                { messages: [fullMessage], role: "expert" },
+                ...prevMessages.slice(0, -1),
+                { ...lastMessage, text: `${lastMessage.text} ${fullMessage}` },
               ];
+            } else {
+              return [...prevMessages, { text: fullMessage, role: "expert" }];
             }
           });
           messageParts.current = [];
@@ -141,13 +138,13 @@ function ChatList({
                       </div>
                     </div>
                   </div>
-                  {item.messages.map((message: string,index:any) => (
-                    <div key={message} className="flex flex-col gap-2 messages">
+                  {/* {item.messages.map((message: string,index:any) => ( */}
+                    <div  className="flex flex-col gap-2 messages">
                       <div className="pl-7">
-                        <p key={index} className="message whitespace-pre-wrap">{message}</p>
+                        <p  className="message whitespace-pre-wrap">{item.text}</p>
                       </div>
                     </div>
-                  ))}
+                  {/* ))} */}
                 </div>
               </div>
             ) : null}
