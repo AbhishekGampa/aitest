@@ -49,7 +49,7 @@ const SearchFilter: React.FC = () => {
         {taskcat.map((category, index) => (
           <div
             key={index}
-            className="px-4 py-2 text-sm bg-gray-100 rounded-3xl max-w-fit whitespace-nowrap"
+            className="px-4 py-2 text-sm mb-3 bg-gray-100 rounded-3xl max-w-fit whitespace-nowrap"
           >
             {category}
           </div>

@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <div className="items-center w-[85vw] px-8 flex flex-col md:flex-row justify-between">
+    <div className="items-center flex flex-col md:flex-row justify-between">
       <div className="flex flex-col">
         <div className="text-2xl text-gray-500 text-semibold">Explore</div>
         <div className="text-2xl">Agents</div>

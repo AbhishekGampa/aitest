@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import React, { useState } from 'react';
-
+import globe from '../../../Images/Globe1.svg';
+import link from '../../../Images/Link.svg';
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -37,9 +39,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, agent }) => {
         <h3 className="text-sm">{agent.description}</h3>
         <div className="h-[50vh] w-[40vw] p-6 text-sm">
           <h6 className="pb-3">Description</h6>
-          <div className="flex text-sm">
-            <p className="text-gray-500 mr-6">🔒 Without internet access</p>
-            <p className="text-gray-500">👤 Created by Zysec</p>
+          <div className="flex text-xs">
+            <div className='flex'>
+              <Image className='w-4 h-4 mr-2' alt='globe' src={globe}/>
+            <p className=" mr-6"> Without internet access</p>
+            </div>
+            <div className='flex'>
+            <Image className='w-4 h-4 mr-2' alt='globe' src={link}/>
+               <p > Created by Zysec</p>
+               </div>
           </div>
         </div>
         <div className="flex items-center justify-between">
@@ -48,8 +56,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, agent }) => {
             <span>{isEnabled ? 'Enabled' : 'Disabled'}</span>
               <div className={`w-11 h-6 rounded-full ${isEnabled ? 'bg-black' : 'bg-gray-200'} relative ml-2`}>
                 <div
-                  className={`h-5 w-5 rounded-full bg-white absolute top-[2px] transition-transform ${
-                    isEnabled ? 'transform translate-x-5' : 'transform translate-x-0'
+                  className={`h-5 w-5 rounded-full bg-white absolute top-[2px] -left-[2px] transition-transform ${
+                    isEnabled ? 'transform translate-x-6' : 'transform translate-x-0'
                   }`}
                 />
               </div>

@@ -42,7 +42,7 @@ const AppHeader = ({
           onClick={handleClick}
           style={{ cursor: "pointer" }}
         />
-        <div className="flex flex-row gap-2 items-center relative">
+        <div className="flex flex-row gap-2 items-center relative z-10">
           <Image src={UserIcon} alt="UserIcon" width={20} height={20} />
           <div className="max-md:text-[9px]">
             <h5>AI expert</h5>

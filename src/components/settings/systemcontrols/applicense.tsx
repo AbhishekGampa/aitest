@@ -17,7 +17,12 @@ import { Button } from "@/components/ui/button";
 import { BiEditAlt, BiCheck } from "react-icons/bi";
 
 const ZySecAppAndSettings = () => {
-  const { data: configDetails, isLoading, isError } = useGetConfigQuery({});
+  const {
+    data: configDetails,
+    isLoading,
+    isError,
+    refetch,
+  } = useGetConfigQuery({});
   const [updateConfig, { isLoading: isUpdating }] = useUpdateConfigMutation();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -48,32 +53,57 @@ const ZySecAppAndSettings = () => {
       private_secret_key: secret,
     };
     await updateConfig(payload);
+    refetch();
+  };
+
+  const updateConfiguration = async (payload:any) => {
+    await updateConfig(payload);
+    refetch();
   };
 
   const handleInternetChange = () => {
     const newInternetState = !internetEnabled;
     setInternetEnabled(newInternetState);
-    if (newInternetState) {
-      toast("Internet enabled");
-    } else {
-      toast("Internet disabled");
-    }
+    updateConfiguration({
+      enable_internet: newInternetState,
+      enable_cyber_news: notificationsEnabled,
+      enable_fetch_content: enrichmentsEnabled,
+      private_open_ai_key: appId,
+      private_secret_key: secret,
+    });
+    toast(newInternetState ? "Internet enabled" : "Internet disabled");
   };
 
   const handleNotificationsChange = () => {
     if (internetEnabled) {
-      setNotificationsEnabled(!notificationsEnabled);
+      const newNotificationsState = !notificationsEnabled;
+      setNotificationsEnabled(newNotificationsState);
+      updateConfiguration({
+        enable_internet: internetEnabled,
+        enable_cyber_news: newNotificationsState,
+        enable_fetch_content: enrichmentsEnabled,
+        private_open_ai_key: appId,
+        private_secret_key: secret,
+      });
       toast(
-        !notificationsEnabled ? "Cyber News enabled" : "Cyber News disabled"
+        newNotificationsState ? "Cyber News enabled" : "Cyber News disabled"
       );
     }
   };
 
   const handleEnrichmentsChange = () => {
     if (internetEnabled) {
-      setEnrichmentsEnabled(!enrichmentsEnabled);
+      const newEnrichmentsState = !enrichmentsEnabled;
+      setEnrichmentsEnabled(newEnrichmentsState);
+      updateConfiguration({
+        enable_internet: internetEnabled,
+        enable_cyber_news: notificationsEnabled,
+        enable_fetch_content: newEnrichmentsState,
+        private_open_ai_key: appId,
+        private_secret_key: secret,
+      });
       toast(
-        !enrichmentsEnabled ? "Fetch Content enabled" : "Fetch Content disabled"
+        newEnrichmentsState ? "Fetch Content enabled" : "Fetch Content disabled"
       );
     }
   };
@@ -105,7 +135,7 @@ const ZySecAppAndSettings = () => {
           )}
         </Button>
       </div>
-      <div className=" px-2">
+      <div className="px-2">
         <Label>App ID</Label>
         <Input
           className="mb-2"

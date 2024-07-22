@@ -77,7 +77,7 @@ const Mode = () => {
   };
 
   return (
-    <div className="space-y-4 w-full text-sm p-2">
+    <div className="space-y-4 w-full text-sm p-2 pb-10">
       <div className="flex items-center justify-between align-middle">
         <div className="text-xl font-bold">Select Mode</div>
         <Button variant="outline" style={buttonStyle} onClick={handleUpdate} disabled={isUpdating}>
