@@ -2,8 +2,8 @@
 
 import React from "react";
 import ApplicationCard from "./applicationcards";
-import { useGetApplicationsQuery } from "@/store/api/applications";
 import { applications } from "../mockdata";
+import { useGetApplicationsQuery } from "@/store/api/applications";
 
 const MainContent: React.FC = () => {
   const { data, isLoading, isError } = useGetApplicationsQuery({});

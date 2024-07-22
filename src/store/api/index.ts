@@ -23,6 +23,8 @@ export const apiSlice = createApi({
     "chatid",
     "applications",
     "prompt_chat",
+    "categories",
+    "users"
   ],
   baseQuery,
   endpoints: () => ({}),
