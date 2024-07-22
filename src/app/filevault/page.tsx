@@ -78,8 +78,6 @@ const FileVault = () => {
     checkboxSelection: isFirstColumn,
   };
 
-  const rowSelection = "multiple";
-
   return (
     <div className="h-full flex flex-col  w-full overflow-clip ">
       <div className="pl-7  pr-4 flex gap-3 flex-col max-md:pl-2">

@@ -16,6 +16,7 @@ import PageWrapper from "@/components/navigation/PageWrapper";
 import SettingsModal from "@/components/settings/settingsmodal";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import NoSSR from "@/components/noSSR";
+import { SocketProvider } from "@/components/socket/socketContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -91,6 +92,7 @@ export default function RootLayout({
       <body className="bg-white h-screen w-screen hide-scrollbar">
         <Provider store={store}>
           <NoSSR>
+          <SocketProvider>
             <div className="h-full w-full flex flex-row">
               <div className="h-full flex ">
                 <SideNavBar
@@ -128,6 +130,7 @@ export default function RootLayout({
                 <PageWrapper>{children}</PageWrapper>
               </div>
             </div>
+            </SocketProvider>
           </NoSSR>
         </Provider>
       </body>

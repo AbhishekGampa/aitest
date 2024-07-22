@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { usePromptChatMutation } from "@/store/api/LLM";
 import ChatBottom from "./chatbottom";
@@ -46,6 +46,18 @@ function ChatList({
     promptChat(payload);
   };
 
+  useEffect(() => {
+    // socket.connect();
+    // console.log("INSIDE_SOCKET");
+    // socket.on("6637b454c268f891f62b7c39", (msg: any) => {
+    //   console.log("msg", msg);
+    // });
+
+    // return () => {
+    //   socket.disconnect();
+    // }
+  }, []);
+  
   return (
     <div className="flex-grow relative flex flex-col overflow-auto">
       <div className="pl-7 mt-7">
