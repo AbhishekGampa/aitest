@@ -19,8 +19,7 @@ function ChatList({
   const [promptChat, { data: promtResponse }] = usePromptChatMutation();
   const [messages, setMessages] = useState<any>([]);
   console.log("messages: ", messages);
-  // const [socketMessage, setSocketMessage] = useState<any>([]);
-  // console.log('socketMessage: ', socketMessage);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const messageParts = useRef<string[]>([]);
   console.log("promtResponse", promtResponse);
 
@@ -74,7 +73,6 @@ function ChatList({
             }
 
             if (lastMessage && lastMessage.role === "expert") {
-              // Assuming messages is an array of objects, this part might need adjustment based on actual data structure
               return [
                 ...prevMessages.slice(0, -1),
                 { ...lastMessage, text: `${lastMessage.text} ${fullMessage}` },
@@ -96,19 +94,25 @@ function ChatList({
     };
   }, [promtResponse]);
 
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
   return (
     <div
       className="flex-grow relative flex flex-col"
       style={{ height: "calc(100vh - 10rem)" }}
     >
-      <div className=" flex flex-col overflow-scroll gap-3 pr-10 pl-7 pb-32  mt-7">
+      <div className="flex flex-col overflow-scroll gap-3 pr-10 pl-7 pb-32 mt-7">
         {messages?.map((item: any, i: any) => (
           <div key={i} className="flex flex-col gap-9">
             {item.role === "user" ? (
               <div className="flex justify-end">
                 <div className="w-max">
                   <div
-                    key={item.id} 
+                    key={item.id}
                     className="flex-grow overflow-auto hide-scrollbar flex rounded-radius-100 bg-gray-100 w-max p-3"
                     style={{ justifyContent: "end" }}
                   >
@@ -138,18 +142,19 @@ function ChatList({
                       </div>
                     </div>
                   </div>
-                    <div  className="flex flex-col gap-2 messages">
-                      <div className="pl-7">
-                        <p  className="message whitespace-pre-wrap">{item.text}</p>
-                      </div>
+                  <div className="flex flex-col gap-2 messages">
+                    <div className="pl-7">
+                      <p className="message whitespace-pre-wrap">{item.text}</p>
                     </div>
+                  </div>
                 </div>
               </div>
             ) : null}
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
-      <div className="px-10 py-2 absolute  left-0 bottom-0 right-0 bg-white">
+      <div className="px-10 py-2 absolute left-0 bottom-0 right-0 bg-white">
         <ChatBottom textref={textref} handleSendMessage={handleSendMessage} />
       </div>
     </div>

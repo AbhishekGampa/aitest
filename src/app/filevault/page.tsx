@@ -6,7 +6,7 @@ import Image from "next/image";
 import arrowDownIcon from "@/Images/ArrowDownIcon.svg";
 import searchIcon from "@/Images/SearchIcon.svg";
 import { Input } from "@/components/ui/input";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css"; // Ensure you have imported necessary styles
 import "ag-grid-community/styles/ag-theme-alpine.css"; // or any other theme you're using
@@ -30,22 +30,18 @@ interface ColDef {
   field: string;
   flex?: number;
   width?: number;
+  headerName?: string; 
+  cellRenderer?: (params: any) => JSX.Element;
+  headerCheckboxSelection?: boolean;
+  checkboxSelection?: boolean;
 }
 
-function isFirstColumn(
-  params:
-    | CheckboxSelectionCallbackParams
-    | HeaderCheckboxSelectionCallbackParams
-) {
-  var displayedColumns = params.api.getAllDisplayedColumns();
-  var thisIsFirstColumn = displayedColumns[0] === params.column;
-  return thisIsFirstColumn;
-}
+
 
 const FileVault = () => {
   const { data } = useGetFileVaultDataQuery({});
   console.log("data: ", data);
-
+  const gridOne = useRef<AgGridReact>(null);
   const rowData = data?.map((item: any) => ({
     Name: item.filename,
     Status: item.embedded_status[0]?.status ? "Active" : "Inactive", // Assuming 'true' means 'Active'
@@ -53,15 +49,20 @@ const FileVault = () => {
     "Created At": item.uploaded_first_time,
     Size: `${item.file_size} bytes`, // Assuming size is in bytes
     Category: item.categories.length > 0 ? item.categories[0].name : "N/A", // Assuming to take the first category's name if available
+   Actions: "..."
+
   }));
 
   const initialColDefs: ColDef[] = [
-    { field: "Name", width: 500 },
+    { field: "Name",  
+      headerCheckboxSelection: true,
+      checkboxSelection: true, },
     { field: "Status" },
     { field: "Created By" },
     { field: "Created At" },
     { field: "Size" },
     { field: "Category" },
+    { field: "Actions", headerName: "" }, 
   ];
 
   const adjustedColDefs = initialColDefs.map((colDef) => {
@@ -74,8 +75,7 @@ const FileVault = () => {
   const defaultColDef = {
     flex: 1, // Allow columns to flex
     minWidth: 100, // Set a reasonable minWidth
-    headerCheckboxSelection: isFirstColumn,
-    checkboxSelection: isFirstColumn,
+
   };
 
   return (
@@ -121,7 +121,7 @@ const FileVault = () => {
         </div>
         <div className="h-full flex flex-col  w-full overflow-clip">
           <div
-            className="ag-theme-alpine ag-root-wrapper"
+            className="ag-theme-alpine ag-root-wrapper justify-center "
             style={{ height: 400, width: "100%" }}
           >
             <AgGridReact
@@ -130,6 +130,7 @@ const FileVault = () => {
               defaultColDef={defaultColDef}
               suppressRowClickSelection={true}
               rowSelection={"multiple"}
+              alignedGrids={[gridOne]}
             />
           </div>
         </div>
