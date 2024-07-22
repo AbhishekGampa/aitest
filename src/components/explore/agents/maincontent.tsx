@@ -36,7 +36,7 @@ const MainContent: React.FC = () => {
   };
 
   return (
-    <div className="px-7 py-2">
+    <div className="px-7 w-[85vw] py-2">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {agents.map((agent: any, index: any) => (
           <AgentCard

@@ -9,8 +9,8 @@ import { Label } from "@/components/ui/label";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 const Mode = () => {
-  const { data: configDetails, isLoading, isError } = useGetConfigQuery({});
-  const [updateConfig, { isLoading: isUpdating }] = useUpdateConfigMutation();
+  const { data: configDetails, isLoading, isError, refetch } = useGetConfigQuery({});
+  const [updateConfig, { isLoading: isUpdating, isSuccess: isUpdateSuccess }] = useUpdateConfigMutation();
   const dispatch = useDispatch();
 
   const [mode, setMode] = useState("private");
@@ -38,6 +38,12 @@ const Mode = () => {
     }
   }, [configDetails]);
 
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      refetch(); // Refetch configuration details after a successful update
+    }
+  }, [isUpdateSuccess, refetch]);
+
   const handleChange = (mode: any) => {
     setMode(mode);
     setButtonStyle({ backgroundColor: "black", color: "white" });
@@ -59,7 +65,7 @@ const Mode = () => {
     } else {
       const payload = {
         ...(configDetails || {}),
-        mode,
+        mode: mode,
         private_base_url: baseUrl,
         private_secret_key: secretKey,
         private_open_ai_key: openAisecretKey,
@@ -74,8 +80,8 @@ const Mode = () => {
     <div className="space-y-4 w-full text-sm p-2">
       <div className="flex items-center justify-between align-middle">
         <div className="text-xl font-bold">Select Mode</div>
-        <Button variant="outline" style={buttonStyle} onClick={handleUpdate}>
-          Update
+        <Button variant="outline" style={buttonStyle} onClick={handleUpdate} disabled={isUpdating}>
+          {isUpdating ? 'Updating...' : 'Update'}
         </Button>
       </div>
 
@@ -172,9 +178,9 @@ const Mode = () => {
               onClick={() => setIsOpenAiSecretVisible(!isOpenAiSecretVisible)}
             >
               {isOpenAiSecretVisible ? (
-                <EyeOffIcon className="h-5 w-5 text-gray-500" />
-              ) : (
                 <EyeIcon className="h-5 w-5 text-gray-500" />
+              ) : (
+                <EyeOffIcon className="h-5 w-5 text-gray-500" />
               )}
             </div>
             <div

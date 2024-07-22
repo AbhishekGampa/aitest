@@ -1,6 +1,8 @@
 import userIcon from "../../Images/userIcon.svg";
 import apps from "../../Images/applications.svg";
 import tasks from "../../Images/TaskIcon.svg";
+import { tokens } from "@/app/themes";
+const Colors =tokens();
 
 export const categories = [
     {
@@ -216,7 +218,7 @@ export const categories = [
         icon:tasks, 
         title: "Workspace Settings",
         description: "Stay updated with the latest digital content.",
-        route: "/workspacesettings", 
+        route: "/workspace", 
       },
     ];
     
@@ -232,6 +234,112 @@ export interface ConfigDetails {
   private_base_url?: string;
 }
 
+
+export type User = {
+  id: number;
+  name: string;
+  role: string;
+  email: string;
+  full_name:string;
+};
+
+export const data = [
+  {
+      id: 1,
+      filename: "data_protection.pdf",
+      description: "Data Protection Standard 2025 (DPS-2025)",
+      author: "Venkatesh Siddi",
+      createdAt: "21 Jan 2024",
+      lastUpdate: "24 Mar 2024",
+      category: "Work",
+      categoryColor: "#00bcd4"
+  },
+  {
+      id: 2,
+      filename: "incident_irp.pdf",
+      description: "Cyber Incident Response Protocol (CIRP)",
+      author: "Venkatesh Siddi",
+      createdAt: "21 Jan 2024",
+      lastUpdate: "24 Mar 2024",
+      category: "Work",
+      categoryColor: "#00bcd4"
+  },
+  {
+      id: 3,
+      filename: "eula_document.pdf",
+      description: "End-User Encryption Requirement (EUER)",
+      author: "Venkatesh Siddi",
+      createdAt: "21 Jan 2024",
+      lastUpdate: "24 Mar 2024",
+      category: "Personal",
+      categoryColor: "#ff5722"
+  },
+  {
+      id: 4,
+      filename: "3rd-party-risk.pdf",
+      description: "Third-Party Vendor Security Assessment (TPVSA)",
+      author: "Venkatesh Siddi",
+      createdAt: "21 Jan 2024",
+      lastUpdate: "24 Mar 2024",
+      category: "Personal",
+      categoryColor: "#ff5722"
+  },
+  {
+      id: 5,
+      filename: "sdlc_document-venky.pdf",
+      description: "Software Development Life Cycle Security Compliance (SDLC-SC)",
+      author: "Venkatesh Siddi",
+      createdAt: "21 Jan 2024",
+      lastUpdate: "24 Mar 2024",
+      category: "Personal",
+      categoryColor: "#ff5722"
+  },
+  {
+      id: 6,
+      filename: "sdlc_document_astik.pdf",
+      description: "Software Development Life Cycle Security Compliance (SDLC-SC)",
+      author: "Venkatesh Siddi",
+      createdAt: "21 Jan 2024",
+      lastUpdate: "24 Mar 2024",
+      category: "Personal",
+      categoryColor: "#ff5722"
+  }
+];
+
+export const Categories = [
+  {
+      id: 1,
+      name: "Documents",
+      color: Colors.personal[100],
+      viewer: 0,
+      doc_count: 20
+  },
+  {
+      id: 2,
+      name: "Policies",
+      color: Colors.work[100],
+      viewer: 50,
+      doc_count: 10
+  },
+  {
+      id: 3,
+      name: "Standards",
+      color: Colors.project[100],
+      viewer: 34,
+      doc_count: 35
+  },
+  {
+      id: 4,
+      name: "Incidents",
+      color: Colors.app_doc[100],
+      viewer: 20,
+      doc_count: 40
+  },
+  {
+      id: 5,
+      name: "Projects"
+  }
+];
     
 
   
