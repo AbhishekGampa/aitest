@@ -65,6 +65,10 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
         xs: "12px",
         "radius-100": "var(--radius-100, 1000px)",
+        '100': 'var(--radius-100, 1000px)', 
+      },
+      backgroundColor: {
+        'surface': 'var(--surface, #F9F9FA)', 
       },
       keyframes: {
         "accordion-down": {

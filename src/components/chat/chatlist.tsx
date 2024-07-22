@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { usePromptChatMutation } from "@/store/api/LLM";
 import ChatBottom from "./chatbottom";
 import { socket } from "./chatsocket";
-
+import Image from "next/image";
 
 function ChatList({
   chatData,
@@ -18,9 +18,11 @@ function ChatList({
   const textref = useRef<HTMLInputElement>(null);
   const [promptChat, { data: promtResponse }] = usePromptChatMutation();
   const [messages, setMessages] = useState<any>([]);
+  console.log("messages: ", messages);
+  // const [socketMessage, setSocketMessage] = useState<any>([]);
+  // console.log('socketMessage: ', socketMessage);
   const messageParts = useRef<string[]>([]);
   console.log("promtResponse", promtResponse);
-
 
   const handleSendMessage = () => {
     let prompt = "";
@@ -46,45 +48,109 @@ function ChatList({
         },
       ],
     };
-    setMessages((pre: any) => [...pre, { text: prompt, role: "user" }]);
+    setMessages((prevMessages: any) => [
+      ...prevMessages,
+      { text: prompt, role: "user" },
+    ]);
     promptChat(payload);
   };
 
   useEffect(() => {
     socket.connect();
     console.log("INSIDE_SOCKET");
-    socket.on("6637b454c268f891f62b7c39", (msg: any) => {
-      messageParts.current.push(msg); 
-      if (msg.endsWith(".")) {
-        const fullMessage = messageParts.current.join(" "); 
-        setMessages((prevMessages:any) => [...prevMessages, { text: fullMessage, role: "user" }]);
-        messageParts.current = [];
+
+    const onMessageReceived = (msg: any) => {
+      console.log("msg: ", msg);
+      if (!messageParts.current.includes(msg)) {
+        messageParts.current.push(msg);
+        if (msg.endsWith(".")) {
+          const fullMessage = messageParts.current.join(" ");
+
+          setMessages((prevMessages: any) => {
+            const lastMessage = prevMessages[prevMessages.length - 1];
+            console.log("lastMessage: ", lastMessage);
+            if (
+              lastMessage?.messages?.[lastMessage.messages.length - 1] ===
+              fullMessage
+            ) {
+              return prevMessages; 
+            }
+
+            if (lastMessage?.role === "expert" && lastMessage?.messages) {
+              lastMessage.messages.push(fullMessage);
+              return [...prevMessages];
+            } else {
+              return [
+                ...prevMessages,
+                { messages: [fullMessage], role: "expert" },
+              ];
+            }
+          });
+          messageParts.current = [];
+        }
       }
-    });   
+    };
+
+    socket.on("6637b454c268f891f62b7c39", onMessageReceived);
 
     return () => {
+      socket.off("6637b454c268f891f62b7c39", onMessageReceived);
       socket.disconnect();
     };
   }, [promtResponse]);
 
   return (
-    <div className="flex-grow relative flex flex-col overflow-auto">
-      <div className="pl-7 mt-7">
-        <div>
-          <div className="flex flex-col h-full">
-            <div
-              className="text-4xl font-normal font-display max-md:text-lg"
-              style={{ color: "#455166" }}
-            >
-              <h1>Chat List</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="flex-grow overflow-auto hide-scrollbar">
-        {messages.map((message: any) => (
-          <div key={message}>
-            <p>{message.text}</p>
+    <div
+      className="flex-grow relative flex flex-col"
+      style={{ height: "calc(100vh - 10rem)" }}
+    >
+      <div className=" flex flex-col overflow-scroll gap-3 pr-10 pl-7 pb-32  mt-7">
+        {messages?.map((item: any, i: any) => (
+          <div key={i} className="flex flex-col gap-9">
+            {item.role === "user" ? (
+              <div className="flex justify-end">
+                <div className="w-max">
+                  <div
+                    key={item.id} 
+                    className="flex-grow overflow-auto hide-scrollbar flex rounded-radius-100 bg-gray-100 w-max p-3"
+                    style={{ justifyContent: "end" }}
+                  >
+                    <div>
+                      <p>{item.text}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : null}
+            {item.role === "expert" ? (
+              <div className="flex flex-col">
+                <div>
+                  <div className="flex flex-row gap-3">
+                    <div className="flex gap-3 items-center">
+                      <Image
+                        src={`${
+                          process.env.NEXT_PUBLIC_BASE_URL + expertData?.avatar
+                        }`}
+                        alt={`${expertData?.expert_name}`}
+                        className="rounded-full"
+                        width={15}
+                        height={15}
+                      />
+                      <div className="text-xs font-normal leading-tight custom-font-family custom-letter-spacing text-custom-color">
+                        {expertData?.expert_name}
+                      </div>
+                    </div>
+                  </div>
+                  {item.messages.map((message: string,index:any) => (
+                    <div key={message} className="flex flex-col gap-2 messages">
+                      <div className="pl-7">
+                        <p key={index} className="message whitespace-pre-wrap">{message}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         ))}
       </div>

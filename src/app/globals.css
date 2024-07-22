@@ -102,3 +102,7 @@
   background: var(--surface, #F9F9FA);
   border: none;
 }
+
+.message {
+  white-space: pre-wrap; /* This will make sure that \n is treated as a line break */
+}
