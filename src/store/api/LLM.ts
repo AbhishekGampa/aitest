@@ -1,6 +1,7 @@
+import { homeapis } from "./home";
 import { apiSlice } from "./index";
 
-const LLMapis = apiSlice.injectEndpoints({
+const LLMapis = homeapis.injectEndpoints({
   endpoints: (builder) => ({
     promptChat: builder.mutation({
       query: (payload) => ({

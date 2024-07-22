@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { usePromptChatMutation } from "@/store/api/LLM";
 import ChatBottom from "./chatbottom";
+import { socket } from "./chatsocket";
+
 
 function ChatList({
   chatData,
@@ -16,7 +18,9 @@ function ChatList({
   const textref = useRef<HTMLInputElement>(null);
   const [promptChat, { data: promtResponse }] = usePromptChatMutation();
   const [messages, setMessages] = useState<any>([]);
+  const messageParts = useRef<string[]>([]);
   console.log("promtResponse", promtResponse);
+
 
   const handleSendMessage = () => {
     let prompt = "";
@@ -24,13 +28,13 @@ function ChatList({
       prompt = textref.current.value;
       textref.current.value = "";
     }
-    console.log("promttt", prompt, chatData);
+    console.log("chatList chatData:", chatData[0]?.id);
     const payload = {
       chat_id: `${chatData?.[0]?.id}`,
-      expert_id: `${chatData[0].expert_ids[0]}`,
+      expert_id: `${chatData[0]?.expert_ids[0]}`,
       files: [],
       category_id: "",
-      stream: false,
+      stream: true,
       appDetails: {
         version: "1.0.0",
         addition_field: "addition_field",
@@ -47,17 +51,22 @@ function ChatList({
   };
 
   useEffect(() => {
-    // socket.connect();
-    // console.log("INSIDE_SOCKET");
-    // socket.on("6637b454c268f891f62b7c39", (msg: any) => {
-    //   console.log("msg", msg);
-    // });
+    socket.connect();
+    console.log("INSIDE_SOCKET");
+    socket.on("6637b454c268f891f62b7c39", (msg: any) => {
+      messageParts.current.push(msg); 
+      if (msg.endsWith(".")) {
+        const fullMessage = messageParts.current.join(" "); 
+        setMessages((prevMessages:any) => [...prevMessages, { text: fullMessage, role: "user" }]);
+        messageParts.current = [];
+      }
+    });   
 
-    // return () => {
-    //   socket.disconnect();
-    // }
-  }, []);
-  
+    return () => {
+      socket.disconnect();
+    };
+  }, [promtResponse]);
+
   return (
     <div className="flex-grow relative flex flex-col overflow-auto">
       <div className="pl-7 mt-7">
