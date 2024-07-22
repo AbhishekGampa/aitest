@@ -138,13 +138,11 @@ function ChatList({
                       </div>
                     </div>
                   </div>
-                  {/* {item.messages.map((message: string,index:any) => ( */}
                     <div  className="flex flex-col gap-2 messages">
                       <div className="pl-7">
                         <p  className="message whitespace-pre-wrap">{item.text}</p>
                       </div>
                     </div>
-                  {/* ))} */}
                 </div>
               </div>
             ) : null}

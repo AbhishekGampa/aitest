@@ -13,6 +13,11 @@ return(
       placeholder="Ask or search for anything. Use @ to mention AI expert or / to run a task"
       style={{ backgroundColor: "#f9f9fa" }}
       ref={textref}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') {
+          handleSendMessage();
+        }
+      }}
     />
 
     <Image
