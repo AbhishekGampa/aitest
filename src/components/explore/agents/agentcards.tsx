@@ -18,7 +18,7 @@ const AgentCard: React.FC<AgentCardProps> = ({ title, description, image, onOpen
   return (
     <>
       <div
-        className="bg-gray-50 p-5 rounded-2xl h-[34vh] w-[50vh] relative transition-transform transform hover:bg-gray-200"
+        className="bg-gray-50 p-5 rounded-2xl h-[34vh] relative transition-transform transform hover:bg-gray-200"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >

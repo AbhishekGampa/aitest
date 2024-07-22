@@ -1,9 +1,9 @@
-import React from 'react';
-import { FiSearch} from 'react-icons/fi';
+import React from "react";
+import { FiSearch } from "react-icons/fi";
 
 const Header: React.FC = () => {
   return (
-    <div className="items-center px-8 flex flex-col md:flex-row h-[30vh] justify-between">
+    <div className="items-center px-8 flex flex-col md:flex-row  justify-between">
       <div className="flex flex-col">
         <div className="text-3xl text-gray-600">Explore</div>
         <div className="text-3xl">Applications</div>
