@@ -11,7 +11,7 @@ function Chats(req: any) {
   const { data: chatData } = useGetChatIdQuery(expertId);
   console.log("chatData: ", chatData);
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex flex-col" style={{ height: "calc(100vh - 4rem)" }}>
       <ChatTop {...expertData} />
       <ChatList chatData={chatData} expertData={expertData} />
     </div>

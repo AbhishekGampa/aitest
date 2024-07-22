@@ -45,6 +45,7 @@ export default function RootLayout({
         break;
       case "Chats":
         setShowModal((prev) => !prev);
+        setShowModalexplore(false);
         break;
       case "Tasks":
         router.push("/tasks");
@@ -52,6 +53,8 @@ export default function RootLayout({
         break;
       case "Explore":
         setShowModalexplore((prev) => !prev);
+        setShowModal(false);
+        break;
       case "FileVault":
         router.push("/filevault");
         setShowModal(false);

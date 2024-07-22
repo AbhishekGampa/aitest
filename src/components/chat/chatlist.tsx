@@ -53,7 +53,7 @@ function ChatList({
     <div className="flex-grow relative flex flex-col overflow-auto">
       <div className="pl-7 mt-7">
         <div>
-          <div className="flex flex-col">
+          <div className="flex flex-col h-full">
             <div
               className="text-4xl font-normal font-display max-md:text-lg"
               style={{ color: "#455166" }}

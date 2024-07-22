@@ -5,9 +5,10 @@ const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_LOCAL_URL,
   prepareHeaders: (headers) => {
     const token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjM3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjEzOTczODksIm5iZiI6MTcyMTM5NzM4OSwianRpIjoiNjMzNjM4MDAtMGE3My00NGFiLTgyMDEtOTRiMDZjMWEyMzczIiwiZXhwIjoxNzIxNDgzNzg5LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.OOgDJSMGvHVzoWwG5jT0p4k7KpJOhTs7G7BrKbcaNzM";
-    headers.set("Authorization", `Bearer ${token}`);
-    headers.set("ngrok-skip-browser-warning", "true");
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjM3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjE2MjYxNjQsIm5iZiI6MTcyMTYyNjE2NCwianRpIjoiYTY4MjkxYWItNmE1Ny00NDI5LWFlMmItYmIzNGRmYTliNjU3IiwiZXhwIjoxNzIxNzEyNTY0LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.exwoNjIeydo1RdNw3dGBsmQhaxhbc6AaVjij1CyScTA";
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
     return headers;
   },
 });
