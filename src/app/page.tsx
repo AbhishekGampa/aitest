@@ -8,8 +8,10 @@ import SaveAutomation from "../components/pages/home/saveautomation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingModal from "../components/ui/loading";
+import Lottie from "lottie-react";
+import loadingAnimationData from "../../public/lottie/loadinganimation.json";
 
-const ScrollableCardsContainer = ({ data }) => {
+const ScrollableCardsContainer = ({ data }: { data: any }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -71,7 +73,7 @@ const ScrollableCardsContainer = ({ data }) => {
       onMouseDown={handleMouseDown}
       onWheel={handleWheel}
     >
-      {data?.map((item, index) => {
+      {data?.map((item: any, index: any) => {
         switch (item.card_type) {
           case "expert":
             return (
@@ -108,7 +110,13 @@ function Home() {
   console.log("Home data", data);
   return (
     <>
-      {isLoading && <LoadingModal />}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
+          <div className="flex flex-col items-center justify-center">
+            <Lottie animationData={loadingAnimationData} loop={true} />
+          </div>
+        </div>
+      )}
       <ToastContainer />
       <div className="pl-7 pr-4 w-full h-80vh max-md:px-2">
         <div className="flex flex-col">

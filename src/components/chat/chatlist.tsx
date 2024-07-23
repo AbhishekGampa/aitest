@@ -1,10 +1,14 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { usePromptChatMutation } from "@/store/api/LLM";
+import {
+  useGetMessagesByChatIdQuery,
+  usePromptChatMutation,
+} from "@/store/api/LLM";
 import ChatBottom from "./chatbottom";
 import { socket } from "./chatsocket";
 import Image from "next/image";
+import ChatHistory from "./chathistory";
 
 function ChatList({
   chatData,
@@ -13,15 +17,36 @@ function ChatList({
   chatData: any;
   expertData: any;
 }) {
-  console.log("ChatList data: ", chatData);
-  console.log("expertData: ", expertData);
   const textref = useRef<HTMLInputElement>(null);
-  const [promptChat, { data: promtResponse }] = usePromptChatMutation();
+  const [promptChat, { data: promtResponse, isSuccess, isError }] =
+    usePromptChatMutation();
   const [messages, setMessages] = useState<any>([]);
+  const [socketResponse, setSocketResponse] = useState<boolean>(false);
+  const [socketMessage, setSocketMessage] = useState<string[]>([]);
   console.log("messages: ", messages);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const messageParts = useRef<string[]>([]);
-  console.log("promtResponse", promtResponse);
+  // const messageParts = useRef<string[]>([]);
+  const { data } = useGetMessagesByChatIdQuery(chatData?.[0]?.id);
+
+  useEffect(() => {
+    if (data) {
+      console.log("chathistory data:", data);
+      const messages = data?.flatMap((msg: any) => {
+        const userPrompt = {
+          text: msg.user_prompt,
+          role: "user",
+        };
+
+        const expertMessage = {
+          text: msg.response[0].choices[0].message.content,
+          role: "expert",
+        };
+
+        return [userPrompt, expertMessage];
+      });
+      setMessages(messages);
+    }
+  }, [data]);
 
   const handleSendMessage = () => {
     let prompt = "";
@@ -52,108 +77,58 @@ function ChatList({
       { text: prompt, role: "user" },
     ]);
     promptChat(payload);
+    setSocketResponse(true);
   };
 
   useEffect(() => {
-    socket.connect();
-    console.log("INSIDE_SOCKET");
+    if (isSuccess) {
+      console.log("isSuccess: ", isSuccess);
+      const expertMessage = {
+        text: promtResponse?.response[0].choices[0].message.content,
+        role: "expert",
+      };
+      setMessages((prevMessages: any) => [...prevMessages, expertMessage]);
+      setSocketMessage([]);
+    }
+  }, [isSuccess, promtResponse?.response]);
 
+  useEffect(() => {
+    socket.connect();
+    console.log("working");
     const onMessageReceived = (msg: any) => {
       console.log("msg: ", msg);
-      if (!messageParts.current.includes(msg)) {
-        messageParts.current.push(msg);
-        if (msg.endsWith(".")) {
-          const fullMessage = messageParts.current.join(" ");
-
-          setMessages((prevMessages) => {
-            const lastMessage = prevMessages[prevMessages.length - 1];
-            console.log("lastMessage: ", lastMessage);
-            if (lastMessage && lastMessage.text === fullMessage) {
-              return prevMessages;
-            }
-
-            if (lastMessage && lastMessage.role === "expert") {
-              return [
-                ...prevMessages.slice(0, -1),
-                { ...lastMessage, text: `${lastMessage.text} ${fullMessage}` },
-              ];
-            } else {
-              return [...prevMessages, { text: fullMessage, role: "expert" }];
-            }
-          });
-          messageParts.current = [];
-        }
-      }
+      setSocketMessage((prev) => [...prev, msg]);
+      setSocketResponse(false);
     };
 
-    socket.on("6637b454c268f891f62b7c39", onMessageReceived);
+    socket.on("chat_message", onMessageReceived);
 
     return () => {
-      socket.off("6637b454c268f891f62b7c39", onMessageReceived);
+      socket.off("chat_message", onMessageReceived);
       socket.disconnect();
     };
-  }, [promtResponse]);
+  }, []);
 
   useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        messagesEndRef?.current?.scrollIntoView({ behavior: "smooth" });
+      }, 100); 
     }
-  }, [messages]);
+  },[data, messages, socketResponse]);
 
   return (
     <div
       className="flex-grow relative flex flex-col"
       style={{ height: "calc(100vh - 10rem)" }}
     >
-      <div className="flex flex-col overflow-scroll gap-3 pr-10 pl-7 pb-32 mt-7">
-        {messages?.map((item: any, i: any) => (
-          <div key={i} className="flex flex-col gap-9">
-            {item.role === "user" ? (
-              <div className="flex justify-end">
-                <div className="w-max">
-                  <div
-                    key={item.id}
-                    className="flex-grow overflow-auto hide-scrollbar flex rounded-radius-100 bg-gray-100 w-max p-3"
-                    style={{ justifyContent: "end" }}
-                  >
-                    <div>
-                      <p>{item.text}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : null}
-            {item.role === "expert" ? (
-              <div className="flex flex-col">
-                <div>
-                  <div className="flex flex-row gap-3">
-                    <div className="flex gap-3 items-center">
-                      <Image
-                        src={`${
-                          process.env.NEXT_PUBLIC_BASE_URL + expertData?.avatar
-                        }`}
-                        alt={`${expertData?.expert_name}`}
-                        className="rounded-full"
-                        width={15}
-                        height={15}
-                      />
-                      <div className="text-xs font-normal leading-tight custom-font-family custom-letter-spacing text-custom-color">
-                        {expertData?.expert_name}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2 messages">
-                    <div className="pl-7">
-                      <p className="message whitespace-pre-wrap">{item.text}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : null}
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
+      <ChatHistory
+        message={messages}
+        expertData={expertData}
+        messagesEndRef={messagesEndRef}
+        socketResponse={socketResponse}
+        socketMessage={socketMessage}
+      />
       <div className="px-10 py-2 absolute left-0 bottom-0 right-0 bg-white">
         <ChatBottom textref={textref} handleSendMessage={handleSendMessage} />
       </div>

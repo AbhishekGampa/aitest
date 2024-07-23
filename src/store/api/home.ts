@@ -5,7 +5,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_LOCAL_URL,
   prepareHeaders: (headers) => {
     const token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjM3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjE2MjYxNjQsIm5iZiI6MTcyMTYyNjE2NCwianRpIjoiYTY4MjkxYWItNmE1Ny00NDI5LWFlMmItYmIzNGRmYTliNjU3IiwiZXhwIjoxNzIxNzEyNTY0LCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.exwoNjIeydo1RdNw3dGBsmQhaxhbc6AaVjij1CyScTA";
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjM3YjQ1NGMyNjhmODkxZjYyYjdjMzkiLCJpYXQiOjE3MjE3MTI4NjIsIm5iZiI6MTcyMTcxMjg2MiwianRpIjoiZDI3N2UwYzItYWE3Ny00MjdlLWEyZDQtOWQ1MjA2NGQ5M2M1IiwiZXhwIjoxNzIxNzk5MjYyLCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.PpFQzh_sbQ61lpfXeHe-jLTFZRAaCD1ggRoJ-osDypo";
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
@@ -15,7 +15,7 @@ const baseQuery = fetchBaseQuery({
 
 export const homeapis = createApi({
   reducerPath: "dashboard",
-  tagTypes: ["dashboard"],
+  tagTypes: ["dashboard","messagesbychatid"],
   baseQuery,
   endpoints: (builder) => ({
     getDashboardData: builder.query({
