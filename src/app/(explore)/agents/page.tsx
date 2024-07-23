@@ -4,8 +4,8 @@ import SearchFilter from "@/components/tasks/search";
 
 const Agents: React.FC = () => {
   return (
-    <div className="flex h-full bg-white px-8">
-      <div className="flex-1 flex flex-col overflow-hidden">
+    <div className="flex h-full bg-white px-5">
+      <div className="flex-1 flex flex-col overflow-scroll">
         <Header />
         <SearchFilter />
         <MainContent />

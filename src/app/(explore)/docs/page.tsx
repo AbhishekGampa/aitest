@@ -5,7 +5,7 @@ import SearchFilter from "@/components/tasks/search";
 
 const Doc: React.FC = () => {
   return (
-    <div className="flex h-screen bg-white ">
+    <div className="flex h-screen bg-white px-5">
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
         <SearchFilter />

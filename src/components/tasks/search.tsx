@@ -37,7 +37,7 @@ const SearchFilter: React.FC = () => {
   };
 
   return (
-    <div className="px-8">
+    <div>
       <div
         ref={scrollContainerRef}
         className="flex space-x-4 md:mb-0 overflow-x-auto py-2 hide-scrollbar cursor-pointer"

@@ -4,7 +4,7 @@ import { categorie, categories } from '../mockdata';
 
 const SearchFilter: React.FC = () => {
   return (
-    <div className="px-8 py-4 bg-white flex flex-col">
+    <div className="py-4 bg-white flex flex-col">
       <div className="flex space-x-4 mb-4 md:mb-0">
         {categorie.map((category, index) => (
           <div key={index} className="px-4 py-3 text-sm bg-gray-100 rounded-full">

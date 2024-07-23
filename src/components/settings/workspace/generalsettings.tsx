@@ -17,7 +17,7 @@ const GeneralSettings: React.FC = () => {
         <div className="flex items-center mt-1">
           <img src="https://via.placeholder.com/150" alt="Basecamp logo" className="h-10 w-10 rounded-full"/>
           <div className="ml-4">
-            <div className="text-sm font-medium text-gray-900">Basecamplogo.png</div>
+            <div className="text-sm font-medium text-gray-900">Basecamplogo.svg</div>
             <button className="text-gray-600 hover:text-gray-900 text-sm">Remove</button> | <button className="text-gray-600 hover:text-gray-900 text-sm">Edit</button>
           </div>
         </div>

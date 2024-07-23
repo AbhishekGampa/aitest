@@ -9,15 +9,14 @@ const Categories: React.FC = () => {
   const { data, error, isLoading } = useGetCategoriesQuery({});
   const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
 
-  console.log(data, "-----");
 
   return (
     <div className="w-full py-4">
       <div className="text-xl py-3 font-semibold">Categories</div>
       <p className="text-sm text-gray-500">Some description here</p>
 
-      <div className="mb-4 w-full">
-        {error && <p className="text-red-500">Failed to load categories</p>}
+      <div className="mb-4 w-full flex justify-center items-center">
+        {error && <p className="text-red-500">No data available</p>}
         {isLoading ? (
           <p>Loading categories...</p>
         ) : (

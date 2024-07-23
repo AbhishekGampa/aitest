@@ -6,15 +6,13 @@ import { useGetExpertsQuery } from "@/store/api/chat";
 import { staticagents } from "../mockdata";
 import AgentCard from "./agentcards";
 import Modal from "./agentdetails";
+import LoadingModal from "@/components/ui/loading";
 
 const MainContent: React.FC = () => {
   const { data, isLoading, isError } = useGetExpertsQuery({});
   const [selectedAgent, setSelectedAgent] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   const agents =
     isError || !data
@@ -36,7 +34,8 @@ const MainContent: React.FC = () => {
   };
 
   return (
-    <div className="px-7 w-[85vw] py-2">
+    <div className="py-2">
+            {isLoading && <LoadingModal/>}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {agents.map((agent: any, index: any) => (
           <AgentCard

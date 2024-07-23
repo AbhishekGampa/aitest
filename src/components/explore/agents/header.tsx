@@ -39,7 +39,7 @@ const Header: React.FC = () => {
       <div className="flex mt-4 md:mt-0">
         <button
           onClick={handleOpenModal}
-          className="w-full py-1 bg-blue-700 text-white rounded-full hover:bg-blue-700 px-3 text-sm"
+          className="w-full py-1 bg-black text-white rounded-full hover:bg-blue-200 px-3 text-sm"
         >
           + Create assistant
         </button>

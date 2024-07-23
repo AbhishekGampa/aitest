@@ -1,5 +1,5 @@
 import Image from "next/image";
-import risk from "../../Images/Image-serface.png";
+import risk from "../../Images/Avatar.svg";
 import React from "react";
 
 interface TaskModalProps {

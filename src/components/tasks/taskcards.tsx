@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { GoArrowUpRight } from "react-icons/go";
-import risk from "../../Images/Image-serface.png";
+import risk from "../../Images/Avatar.svg";
 import Image from "next/image";
 import TaskModal from "./taskmodal";
 

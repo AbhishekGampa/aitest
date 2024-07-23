@@ -1,6 +1,6 @@
-import userIcon from "../../Images/userIcon.svg";
-import apps from "../../Images/applications.svg";
-import tasks from "../../Images/TaskIcon.svg";
+import userIcon from "@/Images/userIcon.svg";
+import apps from "@/Images/applications.svg";
+import tasks from "@/Images/TaskIcon.svg";
 import { tokens } from "@/app/themes";
 const Colors =tokens();
 
@@ -37,44 +37,53 @@ export const categories = [
     {
       title: 'CohereForAI/c4ai-command-r-plus',
       description: "Command R+ is Cohere's latest LLM and is the first open weight model to beat GPT4 in the Chatbot Arena!",
-      // tags: ['Knowledge Base', 'Figma'],
+      tag1: "Knowledge Base",
+      tag2: "Figma",
     },
     {
       title: 'CohereForAI/c4ai-command-r-pro',
       description: "Command R Pro offers advanced features for enterprise-level AI applications.",
-      // tags: ['Documentation', 'Figma'],
+      tag1: "Knowledge Base",
+      tag2: "Figma",
     },
     {
       title: 'CohereForAI/c4ai-command-r-basic',
       description: "Command R Basic is perfect for small-scale AI applications and hobby projects.",
-      // tags: ['Getting Started', 'Figma'],
+      tag1: "Knowledge Base",
+      tag2: "Figma",
     },
     {
       title: 'CohereForAI/c4ai-command-r-lite',
       description: "Command R Lite is a lightweight model designed for mobile and embedded systems.",
-      // tags: ['Tutorials', 'Figma'],
+      tag1: "Knowledge Base",
+      tag2: "Figma",
     },
     {
       title: 'CohereForAI/c4ai-command-r-advanced',
       description: "Command R Advanced includes cutting-edge features for high-performance AI.",
-      // tags: ['API Reference', 'Figma'],
+      tag1: "Knowledge Base",
+      tag2: "Figma",
     },
     {
       title: 'CohereForAI/c4ai-command-r-ultra',
       description: "Command R Ultra provides unparalleled performance for the most demanding AI tasks.",
-      // tags: ['User Guide', 'Figma'],
+      tag1: "Knowledge Base",
+      tag2: "Figma",
     },
     {
       title: 'CohereForAI/c4ai-command-r-experimental',
       description: "Command R Experimental is where we test the latest AI innovations.",
-      // tags: ['Research Papers', 'Figma'],
+      tag1: "Knowledge Base",
+      tag2: "Figma",
     },
     {
       title: 'CohereForAI/c4ai-command-r-custom',
       description: "Command R Custom allows you to tailor the AI to your specific needs.",
-      // tags: ['Custom Models', 'Figma'],
+      tag1: "Knowledge Base",
+      tag2: "Figma",
     },
   ];
+  
 
 
   export const taskcat = [
@@ -97,40 +106,37 @@ export const categories = [
   ];
 
 
-  // import splunk from "../../src/assets/images/app-2.png"
-  // import appTwo from "../../src/assets/images/splunk.png"
-  // import appThree from "../../src/assets/images/app-3.jpg"
-  // import appfour from "../../src/assets/images/app-4.png"
+
   export const staticagents = [
       {
         title: 'Security Co-Pilot',
         description: 'Talk to Security Expert, Stay Secure!',
-        image: 'https://via.placeholder.com/48'
+   
       },
       {
         title: 'Incident Handler',
         description: 'Consult Incident Handler, Manage crises.',
-        image: 'https://via.placeholder.com/48'
+
       },
       {
         title: 'Security Analyst',
         description: 'Meet Security Analyst, Analyze threats.',
-        image: 'https://via.placeholder.com/48'
+        // image: 'https://via.placeholder.com/48'
       },
       {
         title: 'Privacy Expert',
         description: 'Discuss with Privacy Consultant, Safeguard data.',
-        image: 'https://via.placeholder.com/48'
+       
       },
       {
         title: 'My Playbooks',
         description: 'Discuss with Privacy Consultant, Safeguard data.',
-        image: 'https://via.placeholder.com/48'
+  
       },
       {
         title: 'Policy Expert',
         description: 'Connect with Pen Tester, Test defenses.',
-        image: 'https://via.placeholder.com/48'
+
       },
     ];
     export const applications = [

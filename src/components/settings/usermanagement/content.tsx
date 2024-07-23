@@ -25,6 +25,7 @@ import lock from '../../../Images/Lock.svg';
 import userenable from '../../../Images/User_Card_ID.svg';
 import userdisable from '../../../Images/User_Close.svg';
 import Image from "next/image";
+import LoadingModal from "@/components/ui/loading";
 
 type EditUserModalProps = {
   open: boolean;
@@ -42,8 +43,6 @@ const UserManagement = () => {
   const { data: retrieveUsers = [], isLoading, error } = useGetUsersQuery({});
   const [filter, setFilter] = useState("");
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error fetching users</div>;
 
   const filteredUsers = retrieveUsers.filter((user:any) =>
     user.email.toLowerCase().includes(filter.toLowerCase())
@@ -51,6 +50,7 @@ const UserManagement = () => {
 
   return (
     <div className="flex justify-center w-[70vw] ">
+      {isLoading && <LoadingModal/>}
       <div className="flex flex-col w-full h-full ">
         <div className="self-center w-full ">
           <UserTable data={filteredUsers} setFilter={setFilter} />
